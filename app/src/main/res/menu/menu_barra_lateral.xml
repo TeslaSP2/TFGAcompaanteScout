@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/bLUsers"
+            android:icon="@drawable/ic_users"
+            android:title="Usuarios" />
+
+        <item
+            android:id="@+id/bLAsist"
+            android:icon="@drawable/ic_asist"
+            android:title="Asistencia general" />
+
+        <item
+            android:id="@+id/bLProgress"
+            android:icon="@drawable/ic_progress"
+            android:title="Progreso personal general" />
+
+    </group>
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/bLChat"
+            android:icon="@drawable/ic_users"
+            android:title="Chat" />
+
+    </group>
+</menu>
