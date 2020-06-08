@@ -3,9 +3,9 @@ package com.teslasp2.ftc.acompaante_scout.actividadesDeAsistencia;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,20 +23,25 @@ public class ShowAsistByUser extends AppCompatActivity {
     RecyclerView recycler;
     AdapterAsistencia adapter;
     Usuarios usuario, usuarioActual;
+    Button add;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_asist);
+        setContentView(R.layout.activity_show_asist_by_users);
+        add = findViewById(R.id.btAddAsistSh);
         recycler = findViewById(R.id.rvShowAsist);
-        recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
+        recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,
+                false));
 
         Bundle bundle = getIntent().getExtras();
         usuario = (Usuarios) bundle.getSerializable("usuario");
 
+        //Obtiene el usuario actual basado en los datos guardados en el Login
         SharedPreferences preferences = getSharedPreferences("Login", MODE_PRIVATE);
         usuarioActual = Usuarios.getCurrentUser(preferences);
 
+        //Vacia la lista
         if(listaAsistencias !=null)
             listaAsistencias.clear();
 
@@ -58,6 +63,11 @@ public class ShowAsistByUser extends AppCompatActivity {
             }
         });
         recycler.setAdapter(adapter);
+
+        if(usuarioActual.isMonitor()==0)
+            add.setVisibility(View.INVISIBLE);
+        else
+            add.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -87,28 +97,16 @@ public class ShowAsistByUser extends AppCompatActivity {
             }
         });
         recycler.setAdapter(adapter);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_show, menu);
-
-        MenuItem item = findViewById(R.id.addShow);
-        item.setTitle("Añadir asistencia");
 
         if(usuarioActual.isMonitor()==0)
-        {
-            item.setVisible(false);
-        }
-        return true;
+            add.setVisibility(View.INVISIBLE);
+        else
+            add.setVisibility(View.VISIBLE);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id=item.getItemId();
-
-        if(id==R.id.addShow)
+    public void addAsist(View view)
+    {
+        if(usuarioActual.isMonitor()==0)
         {
             Bundle bundle = new Bundle();
 
@@ -118,6 +116,9 @@ public class ShowAsistByUser extends AppCompatActivity {
             i.putExtras(bundle);
             startActivity(i);
         }
-        return super.onOptionsItemSelected(item);
+        else
+        {
+            Toast.makeText(this,"No tienes permiso para hacer eso", Toast.LENGTH_SHORT);
+        }
     }
 }

@@ -15,7 +15,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class LoginActivity extends AppCompatActivity {
@@ -40,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     void sendToMenu()
     {
         SharedPreferences preferences = getSharedPreferences("Login", MODE_PRIVATE);
-        Intent intent = new Intent(this, TemporaryMenu.class);
+        Intent intent = new Intent(this, MainMenu.class);
         Bundle bundle = new Bundle(2);
         bundle.putString("User", preferences.getString("Nombre_User", null));
         bundle.putString("Contra", preferences.getString("Contra", null));

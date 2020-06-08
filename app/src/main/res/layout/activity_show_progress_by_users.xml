@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".actividadesDeUsuario.ShowUsers">
+    tools:context=".actividadesDeProgresoPersonal.ShowProgressByUser">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvShowUsers"
+        android:id="@+id/rvShowProgress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -16,11 +16,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btAddUserShUser"
+        android:id="@+id/btAddProgSh"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Añadir usuario"
+        android:onClick="addProg"
+        android:text="Añadir progreso"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvShowUsers" />
+        app:layout_constraintTop_toBottomOf="@+id/rvShowProgress" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

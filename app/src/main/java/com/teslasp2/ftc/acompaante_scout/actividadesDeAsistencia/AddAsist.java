@@ -12,7 +12,6 @@ import com.teslasp2.ftc.acompaante_scout.R;
 import com.teslasp2.ftc.acompaante_scout.modelos.Asistencia;
 import com.teslasp2.ftc.acompaante_scout.modelos.Usuarios;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
@@ -41,6 +40,7 @@ public class AddAsist extends AppCompatActivity {
         reunion.setChecked(true);
     }
 
+    //Comprueba si todo está bien formado y la inserta en la base de datos
     public void aceptar(View view) throws ExecutionException, InterruptedException {
         if(!si.isChecked()&&!no.isChecked()&&!retraso.isChecked())
         {

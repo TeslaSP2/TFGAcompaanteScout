@@ -9,13 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainMenu"></activity>
-        <activity android:name=".actividadesDeProgresoPersonal.AddProgress" />
-        <activity android:name=".actividadesDeProgresoPersonal.ShowProgress" />
-        <activity android:name=".actividadesDeUsuario.ShowUserSelected" />
-        <activity android:name=".actividadesDeUsuario.ShowUsers" />
-        <activity android:name=".actividadesDeUsuario.AddUser" />
-        <activity android:name=".TemporaryMenu" />
+        <activity android:name=".actividadesDeAsistencia.AddAsist"/>
+        <activity android:name=".actividadesDeAsistencia.ModAsist"/>
+        <activity android:name=".actividadesDeAsistencia.ShowAsistByUser"/>
+        <activity android:name=".actividadesDeAsistencia.ShowAsistSelected"/>
+        <activity android:name=".actividadesDeProgresoPersonal.AddProgress"/>
+        <activity android:name=".actividadesDeProgresoPersonal.ModProgress"/>
+        <activity android:name=".actividadesDeProgresoPersonal.ShowProgressByUser"/>
+        <activity android:name=".actividadesDeProgresoPersonal.ShowProgressSelected"/>
+        <activity android:name=".actividadesDeUsuario.AddUser"/>
+        <activity android:name=".actividadesDeUsuario.ModUser"/>
+        <activity android:name=".actividadesDeUsuario.ShowUserSelected"/>
+        <activity android:name=".MainMenu"/>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -91,10 +91,12 @@ public class ModAsist extends AppCompatActivity {
         }
     }
 
+    //Comprueba que todo este bien para poder cambiar la asistencia seleccionada
     public void aceptar(View view) throws ExecutionException, InterruptedException {
         if(!si.isChecked()&&!no.isChecked()&&!retraso.isChecked())
         {
-            Toast.makeText(this,"Debes seleccionar si asistió, no asistió o se retrasó", Toast.LENGTH_SHORT);
+            Toast.makeText(this,"Debes seleccionar si asistió, no asistió o se retrasó",
+                    Toast.LENGTH_SHORT);
         }
         else
         {
@@ -118,12 +120,14 @@ public class ModAsist extends AppCompatActivity {
             else if(campamento.isChecked())
                 tipo_encuentro="CAMPAMENTO";
 
-            Asistencia nuevaAsistencia = new Asistencia(asistencia.getId(), asistencia.getId_ninio(), tipo_encuentro, fecha, asistio);
+            Asistencia nuevaAsistencia = new Asistencia(asistencia.getId(), asistencia.getId_ninio(),
+                    tipo_encuentro, fecha, asistio);
 
             String respuesta = new Asistencia.Put().execute(nuevaAsistencia.toJSONString()).get();
             if(respuesta!=null)
             {
-                Toast.makeText(this, "Asistencia del niño/a "+usuario.getNombre()+" modificada", Toast.LENGTH_SHORT);
+                Toast.makeText(this, "Asistencia del niño/a "+usuario.getNombre()+" modificada",
+                        Toast.LENGTH_SHORT);
                 finish();
             }
             else

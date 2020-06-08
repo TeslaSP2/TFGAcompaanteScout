@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".actividadesDeUsuario.ShowUsers">
+    tools:context=".actividadesDeAsistencia.ShowAsistByUser">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvShowUsers"
+        android:id="@+id/rvShowAsist"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -16,11 +16,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btAddUserShUser"
+        android:id="@+id/btAddAsistSh"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Añadir usuario"
+        android:onClick="addAsist"
+        android:text="Añadir asistencia"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvShowUsers" />
+        app:layout_constraintTop_toBottomOf="@+id/rvShowAsist" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

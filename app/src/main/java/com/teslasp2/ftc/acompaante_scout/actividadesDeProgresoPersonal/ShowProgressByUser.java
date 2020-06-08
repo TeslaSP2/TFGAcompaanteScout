@@ -3,9 +3,9 @@ package com.teslasp2.ftc.acompaante_scout.actividadesDeProgresoPersonal;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,11 +23,13 @@ public class ShowProgressByUser extends AppCompatActivity {
     RecyclerView recycler;
     AdapterProgreso adapter;
     Usuarios usuario, usuarioActual;
+    Button add;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_progress);
+        setContentView(R.layout.activity_show_progress_by_users);
+        add = findViewById(R.id.btAddProgSh);
         recycler = findViewById(R.id.rvShowProgress);
         recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
 
@@ -58,6 +60,11 @@ public class ShowProgressByUser extends AppCompatActivity {
             }
         });
         recycler.setAdapter(adapter);
+
+        if(usuarioActual.isMonitor()==0)
+            add.setVisibility(View.INVISIBLE);
+        else
+            add.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -89,26 +96,9 @@ public class ShowProgressByUser extends AppCompatActivity {
         recycler.setAdapter(adapter);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_show, menu);
-
-        MenuItem item = findViewById(R.id.addShow);
-        item.setTitle("Añadir progreso");
-
+    public void addProg(View view)
+    {
         if(usuarioActual.isMonitor()==0)
-        {
-            item.setVisible(false);
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id=item.getItemId();
-
-        if(id==R.id.addShow)
         {
             Bundle bundle = new Bundle();
 
@@ -118,6 +108,9 @@ public class ShowProgressByUser extends AppCompatActivity {
             i.putExtras(bundle);
             startActivity(i);
         }
-        return super.onOptionsItemSelected(item);
+        else
+        {
+            Toast.makeText(this,"No tienes permiso para hacer eso", Toast.LENGTH_SHORT);
+        }
     }
 }
