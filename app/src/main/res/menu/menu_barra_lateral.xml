@@ -30,4 +30,13 @@
             android:title="Chat" />
 
     </group>
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/bLChangeUser"
+            android:icon="@drawable/ic_cerrarsesion"
+            android:title="Cerrar sesión" />
+
+    </group>
 </menu>
