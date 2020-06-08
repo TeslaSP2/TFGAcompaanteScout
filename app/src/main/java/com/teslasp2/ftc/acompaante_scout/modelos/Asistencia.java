@@ -30,7 +30,7 @@ public class Asistencia implements Serializable
     private Date fecha;
     private String asistio;
 
-    static final String serverUrl="www.ieslamarisma.net/proyectos/2020/alejandrolopez";
+    static final String serverUrl="https://www.ieslamarisma.net/proyectos/2020/alejandrolopez";
 
     public Asistencia(int id, int id_ninio, String tipo_encuentro, Date fecha, String asistio) {
         this.id = id;

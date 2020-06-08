@@ -1,6 +1,5 @@
 package com.teslasp2.ftc.acompaante_scout.modelos;
 
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
 import org.json.JSONArray;
@@ -20,8 +19,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import static android.content.Context.MODE_PRIVATE;
-
 public class Usuarios implements Serializable
 {
     private int id;
@@ -34,8 +31,9 @@ public class Usuarios implements Serializable
     private String subgrupo;
     private String cargo;
     private String alergenos;
+    private static Usuarios usuarioActual;
 
-    static final String serverUrl="www.ieslamarisma.net/proyectos/2020/alejandrolopez";
+    static final String serverUrl="https://www.ieslamarisma.net/proyectos/2020/alejandrolopez";
 
     public Usuarios(int id, String nombre_user, String contra, int monitor, String nombre, String apellidos, String seccion, String subgrupo, String cargo, String alergenos) {
         this.id = id;
@@ -160,27 +158,13 @@ public class Usuarios implements Serializable
         return obj.toString();
     }
 
-    public static Usuarios getCurrentUser(SharedPreferences preferences)
+    public static void setCurrentUser(Usuarios usuario)
     {
-        Usuarios usuarioActual=null;
-        String nombre_user = preferences.getString("Nombre_User", null), contra = preferences.getString("Contra", null);
-        boolean found = false;
+        usuarioActual = usuario;
+    }
 
-        int cont=0;
-        ArrayList<Usuarios> listaUsuarios = Usuarios.getUsersArray();
-        while(found)
-        {
-            if(listaUsuarios.get(cont).getNombre_user()==nombre_user&&listaUsuarios.get(cont).getContra()==contra)
-            {
-                found=true;
-                usuarioActual=listaUsuarios.get(cont);
-            }
-            else
-            {
-                cont++;
-            }
-        }
-
+    public static Usuarios getCurrentUser()
+    {
         return usuarioActual;
     }
 

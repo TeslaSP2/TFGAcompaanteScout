@@ -46,8 +46,7 @@ public class ShowAsistSelected extends AppCompatActivity implements DelAsistDial
         fecha.setText(sdf.format(asistencia.getFecha()));
         asistio.setText("Asistió: "+asistencia.getAsistio());
 
-        SharedPreferences preferences = getSharedPreferences("Login", MODE_PRIVATE);
-        usuarioActual = Usuarios.getCurrentUser(preferences);
+        usuarioActual = Usuarios.getCurrentUser();
     }
 
     @Override
@@ -55,12 +54,10 @@ public class ShowAsistSelected extends AppCompatActivity implements DelAsistDial
         getMenuInflater().inflate(R.menu.menu_show_selected, menu);
 
         MenuItem item = findViewById(R.id.modShow);
-        item.setTitle("Modificar asistencia");
         if(usuarioActual.isMonitor()==0)
             item.setVisible(false);
 
         item = findViewById(R.id.delShow);
-        item.setTitle("Borrar asistencia");
         if(usuarioActual.isMonitor()==0)
             item.setVisible(false);
 

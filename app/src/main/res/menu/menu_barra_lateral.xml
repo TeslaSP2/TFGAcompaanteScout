@@ -11,6 +11,11 @@
             android:title="Usuarios" />
 
         <item
+            android:id="@+id/bLAddUsers"
+            android:icon="@drawable/ic_users"
+            android:title="Añadir Usuario"/>
+
+        <item
             android:id="@+id/bLAsist"
             android:icon="@drawable/ic_asist"
             android:title="Asistencia general" />

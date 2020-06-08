@@ -46,7 +46,8 @@ public class AddProgress extends AppCompatActivity {
     public void aceptar(View view) throws ExecutionException, InterruptedException {
         if(nombre_progreso.getText().toString()=="")
         {
-            Toast.makeText(this,"El nombre del progreso personal no puede estar en blanco", Toast.LENGTH_SHORT);
+            Toast.makeText(this,"El nombre del progreso personal no puede estar en blanco",
+                    Toast.LENGTH_SHORT);
         }
         else
         {
@@ -67,13 +68,16 @@ public class AddProgress extends AppCompatActivity {
             if(this.entregado.isChecked())
                 entregado = 1;
 
-            ProgresoPersonal progresoPersonal = new ProgresoPersonal(0, usuario.getId(), nombre_progreso.getText().toString(),
-                    fechaInicio,prueba_1.getText().toString(),prueba_2,prueba_3,fechaFinal,entregado);
+            ProgresoPersonal progresoPersonal = new ProgresoPersonal(0, usuario.getId(),
+                    nombre_progreso.getText().toString(),fechaInicio,prueba_1.getText().toString(),
+                    prueba_2,prueba_3,fechaFinal,entregado);
 
             String respuesta = new ProgresoPersonal.Post().execute(progresoPersonal.toJSONString()).get();
             if(respuesta!=null)
             {
-                Toast.makeText(this, "Progreso "+progresoPersonal.getNombre_progreso()+" del niño/a "+usuario.getNombre()+" añadido", Toast.LENGTH_SHORT);
+                Toast.makeText(this,
+                        "Progreso "+progresoPersonal.getNombre_progreso()+" del niño/a "+usuario.getNombre()+" añadido",
+                        Toast.LENGTH_SHORT);
                 finish();
             }
             else

@@ -34,7 +34,7 @@ public class ProgresoPersonal implements Serializable
     private Date fecha_final;
     private int entregado;
 
-    static final String serverUrl="www.ieslamarisma.net/proyectos/2020/alejandrolopez";
+    static final String serverUrl="https://www.ieslamarisma.net/proyectos/2020/alejandrolopez";
 
     public ProgresoPersonal(int id, int id_ninio, String nombre_progreso, Date fecha_inicio, String prueba_1, String prueba_2, String prueba_3, Date fecha_final, int entregado) {
         this.id = id;
@@ -220,7 +220,7 @@ public class ProgresoPersonal implements Serializable
 
     public static ArrayList<ProgresoPersonal> getProgressByUser(int id_user)
     {
-        ArrayList<Asistencia> listaAsistencias = new ArrayList<>();
+        ArrayList<ProgresoPersonal> listaProgresos = new ArrayList<>();
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String respuesta = new Asistencia.GetByNinio().execute(id_user).get();
@@ -229,10 +229,56 @@ public class ProgresoPersonal implements Serializable
             for(int i=0;i<jsonTotal.length();i++)
             {
                 JSONObject obj = jsonTotal.getJSONObject(i);
+                String prueba_1, prueba_2, prueba_3;
+                Date fecha_final;
 
-                listaAsistencias.add(new Asistencia(obj.getInt("Id"),obj.getInt("Id_ninio"),
-                        obj.getString("Tipo_encuentro"),sdf.parse(obj.getString("Fecha")),
-                        obj.getString("Asistio")));
+                if(obj.getString("prueba_1")!=null)
+                {
+                    prueba_1 = obj.getString("prueba_1");
+                }
+                else
+                {
+                    prueba_1 = "";
+                }
+
+                if(obj.getString("prueba_2")!=null)
+                {
+                    prueba_2 = obj.getString("prueba_2");
+                }
+                else
+                {
+                    prueba_2 = "";
+                }
+
+                if(obj.getString("prueba_3")!=null)
+                {
+                    prueba_3 = obj.getString("prueba_3");
+                }
+                else
+                {
+                    prueba_3 = "";
+                }
+
+                if(obj.getString("fecha_final")!=null)
+                {
+                    try
+                    {
+                        fecha_final = sdf.parse(obj.getString("fecha_final"));
+                    }
+                    catch (ParseException e)
+                    {
+                        fecha_final=null;
+                        e.printStackTrace();
+                    }
+                }
+                else
+                {
+                    fecha_final = null;
+                }
+
+                listaProgresos.add(new ProgresoPersonal(obj.getInt("Id"),obj.getInt("Id_ninio"),
+                        obj.getString("Nombre_progreso"),sdf.parse(obj.getString("fecha_inicio")),
+                        prueba_1,prueba_2,prueba_3,fecha_final,obj.getInt("entregado")));
             }
 
         } catch (ExecutionException e) {
@@ -244,7 +290,7 @@ public class ProgresoPersonal implements Serializable
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return listaAsistencias;
+        return listaProgresos;
     }
 
     public static class GetALL extends AsyncTask<Void, Void, String>

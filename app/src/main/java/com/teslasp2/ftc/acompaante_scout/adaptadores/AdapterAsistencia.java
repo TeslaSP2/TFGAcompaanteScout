@@ -45,7 +45,7 @@ public class AdapterAsistencia extends RecyclerView.Adapter<AdapterAsistencia.Vi
 
     @Override
     public void onBindViewHolder(@NonNull AdapterAsistencia.ViewHolderAsistencia viewHolderAsistencia, int i) {
-        Usuarios ninio = Usuarios.getUserById(i);
+        Usuarios ninio = Usuarios.getUserById(i+1);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         if(ninio!=null)

@@ -97,7 +97,9 @@ public class ModProgress extends AppCompatActivity {
             String respuesta = new ProgresoPersonal.Put().execute(nuevoProgresoPersonal.toJSONString()).get();
             if(respuesta!=null)
             {
-                Toast.makeText(this, "Progreso "+nuevoProgresoPersonal.getNombre_progreso()+" del niño/a "+usuario.getNombre()+" modificado", Toast.LENGTH_SHORT);
+                Toast.makeText(this,
+                        "Progreso "+nuevoProgresoPersonal.getNombre_progreso()+" del niño/a "+usuario.getNombre()+" modificado",
+                        Toast.LENGTH_SHORT);
                 finish();
             }
             else

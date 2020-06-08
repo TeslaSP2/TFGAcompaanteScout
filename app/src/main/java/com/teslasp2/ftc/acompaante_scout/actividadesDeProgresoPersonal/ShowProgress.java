@@ -25,9 +25,9 @@ public class ShowProgress extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View vistaRaiz = inflater.inflate(R.layout.activity_show_users, container, false);
+        View vistaRaiz = inflater.inflate(R.layout.activity_show_progress, container, false);
 
-        recycler = vistaRaiz.findViewById(R.id.rvShowUsers);
+        recycler = vistaRaiz.findViewById(R.id.rvShowProgress);
 
         recycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
 

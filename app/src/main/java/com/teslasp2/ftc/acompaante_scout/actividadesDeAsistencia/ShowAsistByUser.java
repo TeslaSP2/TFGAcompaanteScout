@@ -38,8 +38,7 @@ public class ShowAsistByUser extends AppCompatActivity {
         usuario = (Usuarios) bundle.getSerializable("usuario");
 
         //Obtiene el usuario actual basado en los datos guardados en el Login
-        SharedPreferences preferences = getSharedPreferences("Login", MODE_PRIVATE);
-        usuarioActual = Usuarios.getCurrentUser(preferences);
+        usuarioActual = Usuarios.getCurrentUser();
 
         //Vacia la lista
         if(listaAsistencias !=null)
@@ -73,8 +72,7 @@ public class ShowAsistByUser extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        SharedPreferences preferences = getSharedPreferences("Login", MODE_PRIVATE);
-        usuarioActual = Usuarios.getCurrentUser(preferences);
+        usuarioActual = Usuarios.getCurrentUser();
 
         if(listaAsistencias !=null)
             listaAsistencias.clear();

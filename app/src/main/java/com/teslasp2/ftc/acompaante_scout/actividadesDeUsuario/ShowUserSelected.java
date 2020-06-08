@@ -51,25 +51,12 @@ public class ShowUserSelected extends AppCompatActivity implements DelUserDialog
 
         alergenos.setText(usuario.getAlergenos());
 
-        SharedPreferences preferences = getSharedPreferences("Login", MODE_PRIVATE);
-        usuarioActual = Usuarios.getCurrentUser(preferences);
+        usuarioActual = Usuarios.getCurrentUser();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_show_selected, menu);
-
-        MenuItem item = findViewById(R.id.modShow);
-        item.setTitle("Modificar usuario");
-
-        if(usuarioActual.isMonitor()==0)
-            item.setVisible(false);
-
-        item = findViewById(R.id.delShow);
-        item.setTitle("Borrar usuario");
-
-        if(usuarioActual.isMonitor()==0)
-            item.setVisible(false);
         return true;
     }
 
@@ -102,19 +89,29 @@ public class ShowUserSelected extends AppCompatActivity implements DelUserDialog
             }
             case R.id.delShow:
             {
-                DelUserDialog delUserDialog = new DelUserDialog();
-                delUserDialog.show(getSupportFragmentManager(), "del user dialog");
+                if(usuarioActual.isMonitor()==0)
+                    Toast.makeText(this, "No estás autorizado para hacer esto", Toast.LENGTH_SHORT);
+                else
+                {
+                    DelUserDialog delUserDialog = new DelUserDialog();
+                    delUserDialog.show(getSupportFragmentManager(), "del user dialog");
+                }
                 break;
             }
             case R.id.modShow:
             {
-                Bundle bundle = new Bundle();
+                if(usuarioActual.isMonitor()==0)
+                    Toast.makeText(this, "No estás autorizado para hacer esto", Toast.LENGTH_SHORT);
+                else
+                    {
+                    Bundle bundle = new Bundle();
 
-                bundle.putSerializable("usuario",  usuario);
+                    bundle.putSerializable("usuario", usuario);
 
-                Intent i = new Intent(this, ModUser.class);
-                i.putExtras(bundle);
-                startActivity(i);
+                    Intent i = new Intent(this, ModUser.class);
+                    i.putExtras(bundle);
+                    startActivity(i);
+                }
                 break;
             }
         }

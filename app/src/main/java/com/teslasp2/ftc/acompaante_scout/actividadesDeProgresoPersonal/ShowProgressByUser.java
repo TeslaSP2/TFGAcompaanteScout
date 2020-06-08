@@ -36,8 +36,7 @@ public class ShowProgressByUser extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         usuario = (Usuarios) bundle.getSerializable("usuario");
 
-        SharedPreferences preferences = getSharedPreferences("Login", MODE_PRIVATE);
-        usuarioActual = Usuarios.getCurrentUser(preferences);
+        usuarioActual = Usuarios.getCurrentUser();
 
         if(listaprogresos !=null)
             listaprogresos.clear();
@@ -70,8 +69,7 @@ public class ShowProgressByUser extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        SharedPreferences preferences = getSharedPreferences("Login", MODE_PRIVATE);
-        usuarioActual = Usuarios.getCurrentUser(preferences);
+        usuarioActual = Usuarios.getCurrentUser();
 
         if(listaprogresos !=null)
             listaprogresos.clear();

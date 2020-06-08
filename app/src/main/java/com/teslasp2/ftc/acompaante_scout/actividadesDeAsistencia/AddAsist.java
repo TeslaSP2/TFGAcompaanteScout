@@ -44,7 +44,8 @@ public class AddAsist extends AppCompatActivity {
     public void aceptar(View view) throws ExecutionException, InterruptedException {
         if(!si.isChecked()&&!no.isChecked()&&!retraso.isChecked())
         {
-            Toast.makeText(this,"Debes seleccionar si asistió, no asistió o se retrasó", Toast.LENGTH_SHORT);
+            Toast.makeText(this,"Debes seleccionar si asistió, no asistió o se retrasó",
+                    Toast.LENGTH_SHORT);
         }
         else
         {
@@ -68,12 +69,14 @@ public class AddAsist extends AppCompatActivity {
             else if(campamento.isChecked())
                 tipo_encuentro="CAMPAMENTO";
 
-            Asistencia asistencia = new Asistencia(0, usuario.getId(), tipo_encuentro, fecha, asistio);
+            Asistencia asistencia = new Asistencia(0, usuario.getId(), tipo_encuentro, fecha,
+                    asistio);
 
             String respuesta = new Asistencia.Post().execute(asistencia.toJSONString()).get();
             if(respuesta!=null)
             {
-                Toast.makeText(this, "Asistencia del niño/a "+usuario.getNombre()+" añadida", Toast.LENGTH_SHORT);
+                Toast.makeText(this, "Asistencia del niño/a "+usuario.getNombre()+" añadida",
+                        Toast.LENGTH_SHORT);
                 finish();
             }
             else

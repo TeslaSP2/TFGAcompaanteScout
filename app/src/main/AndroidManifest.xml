@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.teslasp2.ftc.acompaante_scout">
 
+    <uses-permission-sdk-23 android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,19 +11,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".actividadesDeAsistencia.AddAsist"/>
-        <activity android:name=".actividadesDeAsistencia.ModAsist"/>
-        <activity android:name=".actividadesDeAsistencia.ShowAsistByUser"/>
-        <activity android:name=".actividadesDeAsistencia.ShowAsistSelected"/>
-        <activity android:name=".actividadesDeProgresoPersonal.AddProgress"/>
-        <activity android:name=".actividadesDeProgresoPersonal.ModProgress"/>
-        <activity android:name=".actividadesDeProgresoPersonal.ShowProgressByUser"/>
-        <activity android:name=".actividadesDeProgresoPersonal.ShowProgressSelected"/>
-        <activity android:name=".actividadesDeUsuario.AddUser"/>
-        <activity android:name=".actividadesDeUsuario.ModUser"/>
-        <activity android:name=".actividadesDeUsuario.ShowUserSelected"/>
-        <activity android:name=".MainMenu"/>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".actividadesDeAsistencia.AddAsist" />
+        <activity android:name=".actividadesDeAsistencia.ModAsist" />
+        <activity android:name=".actividadesDeAsistencia.ShowAsistByUser" />
+        <activity android:name=".actividadesDeAsistencia.ShowAsistSelected" />
+        <activity android:name=".actividadesDeProgresoPersonal.AddProgress" />
+        <activity android:name=".actividadesDeProgresoPersonal.ModProgress" />
+        <activity android:name=".actividadesDeProgresoPersonal.ShowProgressByUser" />
+        <activity android:name=".actividadesDeProgresoPersonal.ShowProgressSelected" />
+        <activity android:name=".actividadesDeUsuario.AddUser" />
+        <activity android:name=".actividadesDeUsuario.ModUser" />
+        <activity android:name=".actividadesDeUsuario.ShowUserSelected" />
+        <activity
+            android:name=".MainMenu"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".LoginActivity"/>
+        <activity
+            android:name=".Launch"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

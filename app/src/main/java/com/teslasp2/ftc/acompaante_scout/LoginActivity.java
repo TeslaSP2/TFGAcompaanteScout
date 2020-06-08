@@ -3,7 +3,6 @@ package com.teslasp2.ftc.acompaante_scout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -29,28 +28,13 @@ public class LoginActivity extends AppCompatActivity {
 
         user = findViewById(R.id.etUser);
         contra = findViewById(R.id.etContra);
-
-        if(getSharedPreferences("Login", MODE_PRIVATE) != null)
-        {
-            sendToMenu();
-        }
-    }
-
-    void sendToMenu()
-    {
-        SharedPreferences preferences = getSharedPreferences("Login", MODE_PRIVATE);
-        Intent intent = new Intent(this, MainMenu.class);
-        Bundle bundle = new Bundle(2);
-        bundle.putString("User", preferences.getString("Nombre_User", null));
-        bundle.putString("Contra", preferences.getString("Contra", null));
-        intent.putExtras(bundle);
-        startActivity(intent);
     }
 
     public void comprobarUsuario(View view)
     {
         String contra = this.contra.getText().toString();
         String user = this.user.getText().toString();
+        Usuarios usuarioActual;
         try
         {
             String respuesta = new Usuarios.GetALL().execute().get();
@@ -63,12 +47,39 @@ public class LoginActivity extends AppCompatActivity {
                 JSONObject obj = usuarios.getJSONObject(cont);
                 if(user.equals(obj.getString("Nombre_User"))&&contra.equals(obj.getString("Contra")))
                 {
-                    //Añadir usuario a sharedpreference para inicio rápido
-                    SharedPreferences preferences = getSharedPreferences("Login", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("Nombre_User", user);
-                    editor.putString("Contra", contra);
-                    editor.commit();
+                    String seccion, subgrupo, alergenos;
+                    if(obj.getString("seccion")!=null)
+                    {
+                        seccion = obj.getString("seccion");
+                    }
+                    else
+                    {
+                        seccion = "";
+                    }
+
+                    if(obj.getString("subgrupo")!=null)
+                    {
+                        subgrupo = obj.getString("subgrupo");
+                    }
+                    else
+                    {
+                        subgrupo = "";
+                    }
+
+                    if(obj.getString("alergenos")!=null)
+                    {
+                        alergenos = obj.getString("alergenos");
+                    }
+                    else
+                    {
+                        alergenos = "";
+                    }
+
+                    usuarioActual =  new Usuarios(obj.getInt("Id"), obj.getString("Nombre_User"),
+                            obj.getString("Contra"), obj.getInt("Monitor"), obj.getString("nombre"),
+                            obj.getString("apellidos"), seccion,
+                            subgrupo, obj.getString("Cargo"), alergenos);
+                    Usuarios.setCurrentUser(usuarioActual);
 
                     salir = true;
                 }
@@ -79,7 +90,10 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             if(salir)
-                sendToMenu();
+            {
+                Intent intent = new Intent(this, MainMenu.class);
+                startActivity(intent);
+            }
             else
                 Toast.makeText(this, "Imposible de encontrar, compruebe el internet del dispositivo o póngase en contacto con el administrador", Toast.LENGTH_SHORT);
         }

@@ -60,8 +60,7 @@ public class ShowProgressSelected extends AppCompatActivity implements DelProgre
         else
             entregado.setText("No entregado");
 
-        SharedPreferences preferences = getSharedPreferences("Login", MODE_PRIVATE);
-        usuarioActual = Usuarios.getCurrentUser(preferences);
+        usuarioActual = Usuarios.getCurrentUser();
     }
 
     @Override
@@ -69,12 +68,10 @@ public class ShowProgressSelected extends AppCompatActivity implements DelProgre
         getMenuInflater().inflate(R.menu.menu_show_selected, menu);
 
         MenuItem item = findViewById(R.id.modShow);
-        item.setTitle("Modificar usuario");
         if(usuarioActual.isMonitor()==0)
             item.setVisible(false);
 
         item = findViewById(R.id.delShow);
-        item.setTitle("Borrar usuario");
         if(usuarioActual.isMonitor()==0)
             item.setVisible(false);
 
@@ -117,10 +114,14 @@ public class ShowProgressSelected extends AppCompatActivity implements DelProgre
             try {
                 String respuesta = new ProgresoPersonal.Delete().execute(progresoPersonal.getId()).get();
                 if (respuesta != null) {
-                    Toast.makeText(this, "Progreso personal " + progresoPersonal.getNombre_progreso() + " eliminado", Toast.LENGTH_SHORT);
+                    Toast.makeText(this,
+                            "Progreso personal " + progresoPersonal.getNombre_progreso() + " eliminado",
+                            Toast.LENGTH_SHORT);
                     finish();
                 } else {
-                    Toast.makeText(this, "El progreso personal " + progresoPersonal.getNombre_progreso() + " no se pudo eliminar", Toast.LENGTH_SHORT);
+                    Toast.makeText(this,
+                            "El progreso personal " + progresoPersonal.getNombre_progreso() + " no se pudo eliminar",
+                            Toast.LENGTH_SHORT);
                 }
             } catch (ExecutionException e) {
                 e.printStackTrace();
