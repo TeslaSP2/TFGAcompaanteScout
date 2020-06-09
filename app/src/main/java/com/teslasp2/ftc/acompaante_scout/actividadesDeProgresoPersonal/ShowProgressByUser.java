@@ -108,7 +108,7 @@ public class ShowProgressByUser extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText(this,"No tienes permiso para hacer eso", Toast.LENGTH_SHORT);
+            Toast.makeText(this,"No tienes permiso para hacer eso", Toast.LENGTH_SHORT).show();
         }
     }
 }

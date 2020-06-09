@@ -90,7 +90,7 @@ public class ShowUserSelected extends AppCompatActivity implements DelUserDialog
             case R.id.delShow:
             {
                 if(usuarioActual.isMonitor()==0)
-                    Toast.makeText(this, "No estás autorizado para hacer esto", Toast.LENGTH_SHORT);
+                    Toast.makeText(this, "No estás autorizado para hacer esto", Toast.LENGTH_SHORT).show();
                 else
                 {
                     DelUserDialog delUserDialog = new DelUserDialog();
@@ -101,7 +101,7 @@ public class ShowUserSelected extends AppCompatActivity implements DelUserDialog
             case R.id.modShow:
             {
                 if(usuarioActual.isMonitor()==0)
-                    Toast.makeText(this, "No estás autorizado para hacer esto", Toast.LENGTH_SHORT);
+                    Toast.makeText(this, "No estás autorizado para hacer esto", Toast.LENGTH_SHORT).show();
                 else
                     {
                     Bundle bundle = new Bundle();
@@ -127,12 +127,12 @@ public class ShowUserSelected extends AppCompatActivity implements DelUserDialog
                 String respuesta = new Usuarios.Delete().execute(usuario.getId()).get();
                 if (respuesta != null)
                 {
-                    Toast.makeText(this, usuario.getNombre() + " eliminado", Toast.LENGTH_SHORT);
+                    Toast.makeText(this, usuario.getNombre() + " eliminado", Toast.LENGTH_SHORT).show();
                     finish();
                 }
                 else
                 {
-                    Toast.makeText(this, usuario.getNombre() + " no se pudo eliminar", Toast.LENGTH_SHORT);
+                    Toast.makeText(this, usuario.getNombre() + " no se pudo eliminar", Toast.LENGTH_SHORT).show();
                 }
             } catch (ExecutionException e) {
                 e.printStackTrace();

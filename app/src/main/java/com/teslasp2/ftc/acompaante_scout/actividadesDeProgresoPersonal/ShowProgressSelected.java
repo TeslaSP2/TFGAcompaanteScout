@@ -116,12 +116,12 @@ public class ShowProgressSelected extends AppCompatActivity implements DelProgre
                 if (respuesta != null) {
                     Toast.makeText(this,
                             "Progreso personal " + progresoPersonal.getNombre_progreso() + " eliminado",
-                            Toast.LENGTH_SHORT);
+                            Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
                     Toast.makeText(this,
                             "El progreso personal " + progresoPersonal.getNombre_progreso() + " no se pudo eliminar",
-                            Toast.LENGTH_SHORT);
+                            Toast.LENGTH_SHORT).show();
                 }
             } catch (ExecutionException e) {
                 e.printStackTrace();

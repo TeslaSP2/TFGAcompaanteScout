@@ -96,7 +96,7 @@ public class ModAsist extends AppCompatActivity {
         if(!si.isChecked()&&!no.isChecked()&&!retraso.isChecked())
         {
             Toast.makeText(this,"Debes seleccionar si asistió, no asistió o se retrasó",
-                    Toast.LENGTH_SHORT);
+                    Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -127,12 +127,12 @@ public class ModAsist extends AppCompatActivity {
             if(respuesta!=null)
             {
                 Toast.makeText(this, "Asistencia del niño/a "+usuario.getNombre()+" modificada",
-                        Toast.LENGTH_SHORT);
+                        Toast.LENGTH_SHORT).show();
                 finish();
             }
             else
             {
-                Toast.makeText(this, "ERROR AL MODIFICAR", Toast.LENGTH_SHORT);
+                Toast.makeText(this, "ERROR AL MODIFICAR", Toast.LENGTH_SHORT).show();
                 finish();
             }
         }

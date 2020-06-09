@@ -64,7 +64,7 @@ public class ModUser extends AppCompatActivity
                 ||apellidos.getText().toString()==""||cargo.getText().toString()=="")
         {
             Toast.makeText(this,"El nombre de usuario, contraseña, nombre, apellidos y cargo no puede estar vacío",
-                    Toast.LENGTH_SHORT);
+                    Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -109,12 +109,12 @@ public class ModUser extends AppCompatActivity
             String respuesta = new Usuarios.Put().execute(nuevoUsuario.toJSONString()).get();
             if(respuesta!=null)
             {
-                Toast.makeText(this, nuevoUsuario.getNombre()+" añadido", Toast.LENGTH_SHORT);
+                Toast.makeText(this, nuevoUsuario.getNombre()+" añadido", Toast.LENGTH_SHORT).show();
                 finish();
             }
             else
             {
-                Toast.makeText(this, "ERROR AL AÑADIR", Toast.LENGTH_SHORT);
+                Toast.makeText(this, "ERROR AL AÑADIR", Toast.LENGTH_SHORT).show();
                 finish();
             }
         }

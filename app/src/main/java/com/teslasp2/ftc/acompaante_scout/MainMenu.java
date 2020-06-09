@@ -77,7 +77,7 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
                 }
             case R.id.bLChat:
                 {
-                    Toast.makeText(this, "No implementado aún", Toast.LENGTH_SHORT);
+                    Toast.makeText(this, "No implementado aún", Toast.LENGTH_SHORT).show();
                     break;
                 }
             case R.id.bLChangeUser:

@@ -45,7 +45,7 @@ public class AddAsist extends AppCompatActivity {
         if(!si.isChecked()&&!no.isChecked()&&!retraso.isChecked())
         {
             Toast.makeText(this,"Debes seleccionar si asistió, no asistió o se retrasó",
-                    Toast.LENGTH_SHORT);
+                    Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -76,12 +76,12 @@ public class AddAsist extends AppCompatActivity {
             if(respuesta!=null)
             {
                 Toast.makeText(this, "Asistencia del niño/a "+usuario.getNombre()+" añadida",
-                        Toast.LENGTH_SHORT);
+                        Toast.LENGTH_SHORT).show();
                 finish();
             }
             else
             {
-                Toast.makeText(this, "ERROR AL AÑADIR", Toast.LENGTH_SHORT);
+                Toast.makeText(this, "ERROR AL AÑADIR", Toast.LENGTH_SHORT).show();
                 finish();
             }
         }

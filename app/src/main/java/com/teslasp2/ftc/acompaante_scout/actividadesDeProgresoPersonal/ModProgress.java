@@ -69,7 +69,7 @@ public class ModProgress extends AppCompatActivity {
     public void aceptar(View view) throws ExecutionException, InterruptedException {
         if(nombre_progreso.getText().toString()=="")
         {
-            Toast.makeText(this,"El nombre del progreso personal no puede estar en blanco", Toast.LENGTH_SHORT);
+            Toast.makeText(this,"El nombre del progreso personal no puede estar en blanco", Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -99,12 +99,12 @@ public class ModProgress extends AppCompatActivity {
             {
                 Toast.makeText(this,
                         "Progreso "+nuevoProgresoPersonal.getNombre_progreso()+" del niño/a "+usuario.getNombre()+" modificado",
-                        Toast.LENGTH_SHORT);
+                        Toast.LENGTH_SHORT).show();
                 finish();
             }
             else
             {
-                Toast.makeText(this, "ERROR AL MODIFICAR", Toast.LENGTH_SHORT);
+                Toast.makeText(this, "ERROR AL MODIFICAR", Toast.LENGTH_SHORT).show();
                 finish();
             }
         }

@@ -100,10 +100,10 @@ public class ShowAsistSelected extends AppCompatActivity implements DelAsistDial
             try {
                 String respuesta = new Asistencia.Delete().execute(asistencia.getId()).get();
                 if (respuesta != null) {
-                    Toast.makeText(this, "Asistencia eliminada", Toast.LENGTH_SHORT);
+                    Toast.makeText(this, "Asistencia eliminada", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
-                    Toast.makeText(this, "No se pudo eliminar la asistencia seleccionada", Toast.LENGTH_SHORT);
+                    Toast.makeText(this, "No se pudo eliminar la asistencia seleccionada", Toast.LENGTH_SHORT).show();
                 }
             } catch (ExecutionException e) {
                 e.printStackTrace();

@@ -47,7 +47,7 @@ public class AddProgress extends AppCompatActivity {
         if(nombre_progreso.getText().toString()=="")
         {
             Toast.makeText(this,"El nombre del progreso personal no puede estar en blanco",
-                    Toast.LENGTH_SHORT);
+                    Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -77,12 +77,12 @@ public class AddProgress extends AppCompatActivity {
             {
                 Toast.makeText(this,
                         "Progreso "+progresoPersonal.getNombre_progreso()+" del niño/a "+usuario.getNombre()+" añadido",
-                        Toast.LENGTH_SHORT);
+                        Toast.LENGTH_SHORT).show();
                 finish();
             }
             else
             {
-                Toast.makeText(this, "ERROR AL AÑADIR", Toast.LENGTH_SHORT);
+                Toast.makeText(this, "ERROR AL AÑADIR", Toast.LENGTH_SHORT).show();
                 finish();
             }
         }
