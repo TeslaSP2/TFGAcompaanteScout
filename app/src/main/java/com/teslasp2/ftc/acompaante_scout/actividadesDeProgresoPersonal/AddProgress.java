@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.teslasp2.ftc.acompaante_scout.R;
+import com.teslasp2.ftc.acompaante_scout.modelos.Asistencia;
 import com.teslasp2.ftc.acompaante_scout.modelos.ProgresoPersonal;
 import com.teslasp2.ftc.acompaante_scout.modelos.Usuarios;
 
@@ -51,13 +52,15 @@ public class AddProgress extends AppCompatActivity {
         }
         else
         {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String prueba_2 = "", prueba_3 = "";
+            String prueba_1 = "Ninguna", prueba_2 = "Ninguna", prueba_3 = "Ninguna";
             Date fechaFinal=null, fechaInicio = new Date(this.fechaInicio.getDate());
             int entregado = 0;
 
             if(cbFechaFinal.isChecked())
                 fechaFinal = new Date(this.fechaFinal.getDate());
+
+            if(this.prueba_1.getText().toString()!="")
+                prueba_1 = this.prueba_1.getText().toString();
 
             if(this.prueba_2.getText().toString()!="")
                 prueba_2 = this.prueba_2.getText().toString();
@@ -68,9 +71,10 @@ public class AddProgress extends AppCompatActivity {
             if(this.entregado.isChecked())
                 entregado = 1;
 
-            ProgresoPersonal progresoPersonal = new ProgresoPersonal(0, usuario.getId(),
-                    nombre_progreso.getText().toString(),fechaInicio,prueba_1.getText().toString(),
-                    prueba_2,prueba_3,fechaFinal,entregado);
+            int lastId = ProgresoPersonal.getLastID();
+            ProgresoPersonal progresoPersonal = new ProgresoPersonal(lastId+1, usuario.getId(),
+                    nombre_progreso.getText().toString(),fechaInicio,prueba_1,prueba_2,prueba_3,
+                    fechaFinal,entregado);
 
             String respuesta = new ProgresoPersonal.Post().execute(progresoPersonal.toJSONString()).get();
             if(respuesta!=null)
@@ -78,13 +82,12 @@ public class AddProgress extends AppCompatActivity {
                 Toast.makeText(this,
                         "Progreso "+progresoPersonal.getNombre_progreso()+" del niño/a "+usuario.getNombre()+" añadido",
                         Toast.LENGTH_SHORT).show();
-                finish();
             }
             else
             {
                 Toast.makeText(this, "ERROR AL AÑADIR", Toast.LENGTH_SHORT).show();
-                finish();
             }
+            finish();
         }
     }
 

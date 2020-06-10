@@ -116,8 +116,13 @@ public class ProgresoPersonal implements Serializable
 
     public String getFecha_finalString()
     {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        return sdf.format(fecha_final);
+        if(fecha_final!=null)
+        {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            return sdf.format(fecha_final);
+        }
+        else
+            return null;
     }
 
     public void setFecha_final(Date fecha_final) {
@@ -132,19 +137,26 @@ public class ProgresoPersonal implements Serializable
         this.entregado = entregado;
     }
 
+    public static int getLastID()
+    {
+        ArrayList<ProgresoPersonal> lista = getProgressArray();
+        int ultimaPos = lista.size()-1;
+        return lista.get(ultimaPos).getId();
+    }
+
     public String toJSONString()
     {
         JSONObject obj=new JSONObject();
         try
         {
-            obj.put("Id",getId());
-            obj.put("Id_ninio",getId_ninio());
-            obj.put("Nombre_progreso",getNombre_progreso());
-            obj.put("fecha_inicio",getFecha_inicio());
+            obj.put("id",getId());
+            obj.put("id_ninio",getId_ninio());
+            obj.put("nombre_progreso",getNombre_progreso());
+            obj.put("fecha_inicio",getFecha_inicioString());
             obj.put("prueba_1",getPrueba_1());
             obj.put("prueba_2",getPrueba_2());
             obj.put("prueba_3",getPrueba_3());
-            obj.put("fecha_final",getFecha_final());
+            obj.put("fecha_final",getFecha_finalString());
             obj.put("entregado",entregado);
         }
         catch (JSONException e)
@@ -417,8 +429,12 @@ public class ProgresoPersonal implements Serializable
             try {
                 connection = (HttpURLConnection) new URL(serverUrl+"/progreso_personal?").openConnection();
 
-                connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
                 connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+                connection.setRequestProperty("Accept", "application/json");
+                connection.setDoOutput(true);
+
+                connection.connect();
 
                 OutputStream os = connection.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
@@ -428,8 +444,6 @@ public class ProgresoPersonal implements Serializable
                 writer.flush();
                 writer.close();
                 os.close();
-
-                connection.connect();
 
                 System.err.println(connection.getResponseMessage()+"");
                 return connection.getResponseMessage()+"";

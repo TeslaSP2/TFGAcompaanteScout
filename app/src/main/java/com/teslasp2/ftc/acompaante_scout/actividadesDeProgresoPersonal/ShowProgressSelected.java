@@ -77,7 +77,7 @@ public class ShowProgressSelected extends AppCompatActivity implements DelProgre
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_show_selected, menu);
+        getMenuInflater().inflate(R.menu.menu_show_selected_asist_progress, menu);
         return true;
     }
 

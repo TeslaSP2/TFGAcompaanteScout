@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.teslasp2.ftc.acompaante_scout.R;
+import com.teslasp2.ftc.acompaante_scout.modelos.ProgresoPersonal;
 import com.teslasp2.ftc.acompaante_scout.modelos.Usuarios;
 
 import java.util.concurrent.ExecutionException;
@@ -49,10 +50,7 @@ public class AddUser extends AppCompatActivity
         }
         else if(!nombre.getText().toString().matches("[A-Za-z]+")
                 ||!apellidos.getText().toString().matches("[A-Za-z]+")
-                ||!cargo.getText().toString().matches("[A-Za-z]+")
-                ||!seccion.getText().toString().matches("[A-Za-z]+")
-                ||!subgrupo.getText().toString().matches("[A-Za-z]+")
-                ||!alergenos.getText().toString().matches("[A-Za-z]+"))
+                ||!cargo.getText().toString().matches("[A-Za-z]+"))
         {
             Toast.makeText(this,"Solo la contraseña acepta números y símbolos",
                     Toast.LENGTH_SHORT).show();
@@ -92,22 +90,22 @@ public class AddUser extends AppCompatActivity
             if(this.monitor.isChecked())
                 monitor = 1;
 
+            int lastId = Usuarios.getLastID();
             Usuarios nuevoUsuario =
-                    new Usuarios(0, nombre_user.getText().toString(),contra.getText().toString(),monitor,
-                            nombre.getText().toString(),apellidos.getText().toString(),seccion,subgrupo,cargo.getText().toString(),
-                            alergenos);
+                    new Usuarios(lastId+1, nombre_user.getText().toString(), contra.getText().toString(),
+                            monitor, nombre.getText().toString(), apellidos.getText().toString(),
+                            seccion, subgrupo, cargo.getText().toString(), alergenos);
 
             String respuesta = new Usuarios.Post().execute(nuevoUsuario.toJSONString()).get();
             if(respuesta!=null)
             {
-                Toast.makeText(this, nuevoUsuario.getNombre()+" añadido", Toast.LENGTH_SHORT).show();
-                finish();
+                Toast.makeText(this, nuevoUsuario.getNombre()+" añadido "+" "+respuesta+" "+nuevoUsuario.toJSONString(), Toast.LENGTH_SHORT).show();
             }
             else
             {
                 Toast.makeText(this, "ERROR AL AÑADIR", Toast.LENGTH_SHORT).show();
-                finish();
             }
+            finish();
         }
     }
 }

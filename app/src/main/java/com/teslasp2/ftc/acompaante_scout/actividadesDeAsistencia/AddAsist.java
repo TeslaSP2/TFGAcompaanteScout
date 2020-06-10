@@ -12,8 +12,12 @@ import com.teslasp2.ftc.acompaante_scout.R;
 import com.teslasp2.ftc.acompaante_scout.modelos.Asistencia;
 import com.teslasp2.ftc.acompaante_scout.modelos.Usuarios;
 
+import java.net.HttpURLConnection;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
+
+import static com.teslasp2.ftc.acompaante_scout.modelos.Asistencia.getAsistsArray;
+import static com.teslasp2.ftc.acompaante_scout.modelos.Asistencia.getLastID;
 
 public class AddAsist extends AppCompatActivity {
 
@@ -68,18 +72,19 @@ public class AddAsist extends AppCompatActivity {
             else if(campamento.isChecked())
                 tipo_encuentro="CAMPAMENTO";
 
-            Asistencia asistencia = new Asistencia(0, usuario.getId(), tipo_encuentro, fecha,
+            int lastId = Asistencia.getLastID();
+            Asistencia asistencia = new Asistencia(lastId+1, usuario.getId(), tipo_encuentro, fecha,
                     asistio);
 
-            String respuesta = new Asistencia.Post().execute(asistencia.toJSONString()).get();
-            if(respuesta!=null)
+            int respuesta = new Asistencia.Post().execute(asistencia.toJSONString()).get();
+            if(respuesta == HttpURLConnection.HTTP_OK)
             {
-                Toast.makeText(this, "Asistencia del niño/a "+usuario.getNombre()+" añadida "+respuesta+" "+asistencia.toJSONString(),
+                Toast.makeText(this, "Asistencia del niño/a "+usuario.getNombre()+" añadida ",
                         Toast.LENGTH_SHORT).show();
             }
             else
             {
-                Toast.makeText(this, "ERROR AL AÑADIR", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "ERROR AL AÑADIR "+respuesta, Toast.LENGTH_SHORT).show();
             }
             finish();
         }

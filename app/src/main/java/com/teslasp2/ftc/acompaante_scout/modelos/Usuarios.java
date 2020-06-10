@@ -128,6 +128,13 @@ public class Usuarios implements Serializable
         this.alergenos = alergenos;
     }
 
+    public static int getLastID()
+    {
+        ArrayList<Usuarios> lista = getUsersArray();
+        int ultimaPos = lista.size()-1;
+        return lista.get(ultimaPos).getId();
+    }
+
     public String toString()
     {
         return "Nombre: "+this.nombre+"\nApellidos: ";
@@ -139,10 +146,10 @@ public class Usuarios implements Serializable
         JSONObject obj=new JSONObject();
         try
         {
-            obj.put("Id",getId());
-            obj.put("Nombre_User",getNombre_user());
-            obj.put("Contra",getContra());
-            obj.put("Monitor",isMonitor());
+            obj.put("id",getId());
+            obj.put("nombre_user",getNombre_user());
+            obj.put("contra",getContra());
+            obj.put("monitor",isMonitor());
             obj.put("nombre",getNombre());
             obj.put("apellidos",getApellidos());
             obj.put("seccion",getSeccion());
@@ -361,8 +368,12 @@ public class Usuarios implements Serializable
             try {
                 connection = (HttpURLConnection) new URL(serverUrl+"/usuario?").openConnection();
 
-                connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
                 connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+                connection.setRequestProperty("Accept", "application/json");
+                connection.setDoOutput(true);
+
+                connection.connect();
 
                 OutputStream os = connection.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
@@ -372,8 +383,6 @@ public class Usuarios implements Serializable
                 writer.flush();
                 writer.close();
                 os.close();
-
-                connection.connect();
 
                 System.err.println(connection.getResponseMessage()+"");
                 return connection.getResponseMessage()+"";
@@ -400,8 +409,10 @@ public class Usuarios implements Serializable
             try {
                 connection = (HttpURLConnection) new URL(serverUrl+"/usuario?").openConnection();
 
-                connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
                 connection.setRequestMethod("PUT");
+                connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+                connection.setRequestProperty("Accept", "application/json");
+                connection.setDoOutput(true);
 
                 OutputStream os = connection.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));

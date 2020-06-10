@@ -37,17 +37,17 @@ public class AdapterUsuarios extends RecyclerView.Adapter<AdapterUsuarios.ViewHo
     @Override
     public void onBindViewHolder(@NonNull AdapterUsuarios.ViewHolderUsuarios viewHolderUsuarios, int i) {
         String info = "";
-        if(listaUsuarios.get(i).getSeccion()!="")
+        if(listaUsuarios.get(i).getSeccion()!=""||listaUsuarios.get(i).getSeccion().equals(" "))
         {
             info += listaUsuarios.get(i).getSeccion()+", ";
         }
 
-        if(listaUsuarios.get(i).getSubgrupo()!="")
+        if(listaUsuarios.get(i).getSubgrupo()!=""||listaUsuarios.get(i).getSubgrupo().equals(" "))
         {
             info += listaUsuarios.get(i).getSubgrupo()+", ";
         }
 
-        if(listaUsuarios.get(i).getCargo()!="")
+        if(listaUsuarios.get(i).getCargo()!=""||listaUsuarios.get(i).getCargo().equals(" "))
         {
             info += listaUsuarios.get(i).getCargo();
         }

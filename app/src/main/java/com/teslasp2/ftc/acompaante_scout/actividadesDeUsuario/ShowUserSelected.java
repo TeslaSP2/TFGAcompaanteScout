@@ -40,16 +40,16 @@ public class ShowUserSelected extends AppCompatActivity implements DelUserDialog
 
         nombre.setText(usuario.getNombre()+" ");
         apellidos.setText(usuario.getApellidos());
-        seccion.setText(usuario.getSeccion()+" ");
-        subgrupo.setText(usuario.getSubgrupo()+" ");
-        cargo.setText(usuario.getCargo()+" ");
+        seccion.setText("Sección: "+usuario.getSeccion()+" ");
+        subgrupo.setText("Subgrupo: "+usuario.getSubgrupo()+" ");
+        cargo.setText("Cargo: "+usuario.getCargo()+" ");
 
         if(usuario.isMonitor()==1)
             monitor.setText("Monitor");
         else
             monitor.setText("");
 
-        alergenos.setText(usuario.getAlergenos());
+        alergenos.setText("Alérgenos: "+usuario.getAlergenos());
 
         usuarioActual = Usuarios.getCurrentUser();
     }

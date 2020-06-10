@@ -86,16 +86,23 @@ public class Asistencia implements Serializable
         this.asistio = asistio;
     }
 
+    public static int getLastID()
+    {
+        ArrayList<Asistencia> lista = getAsistsArray();
+        int ultimaPos = lista.size()-1;
+        return lista.get(ultimaPos).getId();
+    }
+
     public String toJSONString()
     {
         JSONObject obj=new JSONObject();
         try
         {
-            obj.put("Id",getId());
-            obj.put("Id_ninio",getId_ninio());
-            obj.put("Tipo_encuentro",getTipo_encuentro());
-            obj.put("Fecha",getFechaString());
-            obj.put("Asistio",getAsistio());
+            obj.put("id",getId());
+            obj.put("id_ninio",getId_ninio());
+            obj.put("tipo_encuentro",getTipo_encuentro());
+            obj.put("fecha",getFechaString());
+            obj.put("asistio",getAsistio());
         }
         catch (JSONException e)
         {
@@ -277,10 +284,10 @@ public class Asistencia implements Serializable
         }
     }
 
-    public static class Post extends AsyncTask<String, Void, String>
+    public static class Post extends AsyncTask<String, Void, Integer>
     {
         @Override
-        protected String doInBackground(String... strings)
+        protected Integer doInBackground(String... strings)
         {
             HttpURLConnection connection = null;
 
@@ -292,6 +299,8 @@ public class Asistencia implements Serializable
                 connection.setRequestProperty("Accept", "application/json");
                 connection.setDoOutput(true);
 
+                connection.connect();
+
                 OutputStream os = connection.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
 
@@ -301,10 +310,8 @@ public class Asistencia implements Serializable
                 writer.close();
                 os.close();
 
-                connection.connect();
-
                 System.err.println(connection.getResponseMessage()+"");
-                return connection.getResponseMessage()+"";
+                return connection.getResponseCode();
             }
             catch (IOException e)
             {
@@ -328,8 +335,10 @@ public class Asistencia implements Serializable
             try {
                 connection = (HttpURLConnection) new URL(serverUrl+"/asistencia?").openConnection();
 
-                connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
                 connection.setRequestMethod("PUT");
+                connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+
+                connection.connect();
 
                 OutputStream os = connection.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
@@ -339,8 +348,6 @@ public class Asistencia implements Serializable
                 writer.flush();
                 writer.close();
                 os.close();
-
-                connection.connect();
 
                 System.err.println(connection.getResponseMessage()+"");
                 return connection.getResponseMessage()+"";

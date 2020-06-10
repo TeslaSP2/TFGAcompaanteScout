@@ -12,6 +12,8 @@ import com.teslasp2.ftc.acompaante_scout.R;
 import com.teslasp2.ftc.acompaante_scout.modelos.Asistencia;
 import com.teslasp2.ftc.acompaante_scout.modelos.Usuarios;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
@@ -27,7 +29,7 @@ public class ModAsist extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mod_asist);
 
-        fecha = findViewById(R.id.cvFechaEncuentro);
+        fecha = findViewById(R.id.cvModFechaEncuentro);
         si = findViewById(R.id.rbModSiAsistio);
         no = findViewById(R.id.rbModNoAsistio);
         retraso = findViewById(R.id.rbModRetrasoAsistio);
@@ -126,7 +128,7 @@ public class ModAsist extends AppCompatActivity {
             String respuesta = new Asistencia.Put().execute(nuevaAsistencia.toJSONString()).get();
             if(respuesta!=null)
             {
-                Toast.makeText(this, "Asistencia del niño/a "+usuario.getNombre()+" modificada",
+                Toast.makeText(this, "Asistencia del niño/a "+respuesta+" "+nuevaAsistencia.toJSONString()+" "+usuario.getNombre()+" modificada",
                         Toast.LENGTH_SHORT).show();
             }
             else

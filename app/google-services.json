@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "620129398557",
+    "firebase_url": "https://tfgacompaantescout-chat.firebaseio.com",
+    "project_id": "tfgacompaantescout-chat",
+    "storage_bucket": "tfgacompaantescout-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:620129398557:android:6a9c02961ef6fa04cabbf4",
+        "android_client_info": {
+          "package_name": "com.teslasp2.ftc.acompaante_scout"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "620129398557-2ll5722lf6ssodul319mu4tbiov4f3qm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcZAHlaXx5vUabSB6axglSktCMr22N5KA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "620129398557-2ll5722lf6ssodul319mu4tbiov4f3qm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
