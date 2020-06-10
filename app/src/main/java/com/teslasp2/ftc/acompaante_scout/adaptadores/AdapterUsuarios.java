@@ -54,7 +54,6 @@ public class AdapterUsuarios extends RecyclerView.Adapter<AdapterUsuarios.ViewHo
 
         viewHolderUsuarios.nombre.setText(listaUsuarios.get(i).getNombre()+" "+listaUsuarios.get(i).getApellidos());
         viewHolderUsuarios.info.setText(info);
-        //viewHolderDatos.foto.setImageResource((int) listaUsuarios.get(i).getImagenList());
     }
 
     @Override
@@ -76,13 +75,11 @@ public class AdapterUsuarios extends RecyclerView.Adapter<AdapterUsuarios.ViewHo
     public class ViewHolderUsuarios extends RecyclerView.ViewHolder {
 
         TextView nombre, info;
-        //ImageView foto;
 
         public ViewHolderUsuarios(@NonNull View itemView) {
             super(itemView);
             nombre = itemView.findViewById(R.id.tvNombreApellidos);
             info = itemView.findViewById(R.id.tvSeccionSubgrupo);
-            //foto = itemView.findViewById(R.id.idImagen);
         }
     }
 

@@ -34,80 +34,89 @@ public class LoginActivity extends AppCompatActivity {
     {
         String contra = this.contra.getText().toString();
         String user = this.user.getText().toString();
-        Usuarios usuarioActual;
-        try
+
+        if(!user.matches("[A-Za-z]+")||!user.equals("")||!user.equals(" ")||!contra.equals("")||!contra.equals(" "))
         {
-            String respuesta = new Usuarios.GetALL().execute().get();
-            JSONArray usuarios = new JSONArray(respuesta);
-            boolean salir=false;
-            int cont=0;
-
-            while(!salir && cont < usuarios.length())
+            Usuarios usuarioActual;
+            try
             {
-                JSONObject obj = usuarios.getJSONObject(cont);
-                if(user.equals(obj.getString("Nombre_User"))&&contra.equals(obj.getString("Contra")))
+                String respuesta = new Usuarios.GetALL().execute().get();
+                JSONArray usuarios = new JSONArray(respuesta);
+                boolean salir=false;
+                int cont=0;
+
+                while(!salir && cont < usuarios.length())
                 {
-                    String seccion, subgrupo, alergenos;
-                    if(obj.getString("seccion")!=null)
+                    JSONObject obj = usuarios.getJSONObject(cont);
+                    if(user.equals(obj.getString("Nombre_User"))&&contra.equals(obj.getString("Contra")))
                     {
-                        seccion = obj.getString("seccion");
+                        String seccion, subgrupo, alergenos;
+                        if(obj.getString("seccion")!=null)
+                        {
+                            seccion = obj.getString("seccion");
+                        }
+                        else
+                        {
+                            seccion = "";
+                        }
+
+                        if(obj.getString("subgrupo")!=null)
+                        {
+                            subgrupo = obj.getString("subgrupo");
+                        }
+                        else
+                        {
+                            subgrupo = "";
+                        }
+
+                        if(obj.getString("alergenos")!=null)
+                        {
+                            alergenos = obj.getString("alergenos");
+                        }
+                        else
+                        {
+                            alergenos = "";
+                        }
+
+                        usuarioActual =  new Usuarios(obj.getInt("Id"), obj.getString("Nombre_User"),
+                                obj.getString("Contra"), obj.getInt("Monitor"), obj.getString("nombre"),
+                                obj.getString("apellidos"), seccion,
+                                subgrupo, obj.getString("Cargo"), alergenos);
+                        Usuarios.setCurrentUser(usuarioActual);
+
+                        salir = true;
                     }
                     else
                     {
-                        seccion = "";
+                        cont++;
                     }
+                }
 
-                    if(obj.getString("subgrupo")!=null)
-                    {
-                        subgrupo = obj.getString("subgrupo");
-                    }
-                    else
-                    {
-                        subgrupo = "";
-                    }
-
-                    if(obj.getString("alergenos")!=null)
-                    {
-                        alergenos = obj.getString("alergenos");
-                    }
-                    else
-                    {
-                        alergenos = "";
-                    }
-
-                    usuarioActual =  new Usuarios(obj.getInt("Id"), obj.getString("Nombre_User"),
-                            obj.getString("Contra"), obj.getInt("Monitor"), obj.getString("nombre"),
-                            obj.getString("apellidos"), seccion,
-                            subgrupo, obj.getString("Cargo"), alergenos);
-                    Usuarios.setCurrentUser(usuarioActual);
-
-                    salir = true;
+                if(salir)
+                {
+                    Intent intent = new Intent(this, MainMenu.class);
+                    startActivity(intent);
                 }
                 else
-                {
-                    cont++;
-                }
+                    Toast.makeText(this, "Imposible de encontrar, compruebe el internet del dispositivo o póngase en contacto con el administrador", Toast.LENGTH_SHORT);
             }
-
-            if(salir)
+            catch (ExecutionException e)
             {
-                Intent intent = new Intent(this, MainMenu.class);
-                startActivity(intent);
+                Toast.makeText(this, "Imposible de encontrar, compruebe el internet del dispositivo o espere un minuto", Toast.LENGTH_SHORT);
             }
-            else
-                Toast.makeText(this, "Imposible de encontrar, compruebe el internet del dispositivo o póngase en contacto con el administrador", Toast.LENGTH_SHORT);
+            catch (InterruptedException e)
+            {
+                Toast.makeText(this, "Imposible de encontrar, compruebe el internet del dispositivo o espere un minuto", Toast.LENGTH_SHORT);
+            }
+            catch (JSONException e)
+            {
+                Toast.makeText(this, "Imposible de encontrar, compruebe el internet del dispositivo o espere un minuto", Toast.LENGTH_SHORT);
+            }
         }
-        catch (ExecutionException e)
+        else
         {
-            Toast.makeText(this, "Imposible de encontrar, compruebe el internet del dispositivo o espere un minuto", Toast.LENGTH_SHORT);
-        }
-        catch (InterruptedException e)
-        {
-            Toast.makeText(this, "Imposible de encontrar, compruebe el internet del dispositivo o espere un minuto", Toast.LENGTH_SHORT);
-        }
-        catch (JSONException e)
-        {
-            Toast.makeText(this, "Imposible de encontrar, compruebe el internet del dispositivo o espere un minuto", Toast.LENGTH_SHORT);
+            Toast.makeText(this, "Información errónea, inténtelo de nuevo",
+                    Toast.LENGTH_SHORT).show();
         }
     }
 }

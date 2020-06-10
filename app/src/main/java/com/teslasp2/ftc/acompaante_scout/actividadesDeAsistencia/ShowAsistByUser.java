@@ -3,8 +3,11 @@ package com.teslasp2.ftc.acompaante_scout.actividadesDeAsistencia;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,11 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.teslasp2.ftc.acompaante_scout.R;
 import com.teslasp2.ftc.acompaante_scout.adaptadores.AdapterAsistencia;
 import com.teslasp2.ftc.acompaante_scout.modelos.Asistencia;
+import com.teslasp2.ftc.acompaante_scout.modelos.ProgresoPersonal;
 import com.teslasp2.ftc.acompaante_scout.modelos.Usuarios;
 
 import java.util.ArrayList;
 
-public class ShowAsistByUser extends AppCompatActivity {
+public class ShowAsistByUser extends AppCompatActivity implements SearchView.OnQueryTextListener{
     ArrayList<Asistencia> listaAsistencias;
     RecyclerView recycler;
     AdapterAsistencia adapter;
@@ -100,6 +104,48 @@ public class ShowAsistByUser extends AppCompatActivity {
             add.setVisibility(View.INVISIBLE);
         else
             add.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_query, menu);
+
+        MenuItem menuItem = menu.findItem(R.id.search_list);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+
+        searchView.setOnQueryTextListener(this);
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+
+        String busqueda = s.toLowerCase();
+        ArrayList<Asistencia> listaBusqueda = new ArrayList<>();
+
+        if(busqueda.equals(""))
+        {
+            listaBusqueda=listaAsistencias;
+        }
+        else
+        {
+            for (Asistencia asistencia: listaAsistencias)
+            {
+                if(asistencia.getFechaString().contains(busqueda))
+                {
+                    listaBusqueda.add(asistencia);
+                }
+            }
+        }
+
+        adapter.setListaAsistencias(listaBusqueda);
+
+        return false;
     }
 
     public void addAsist(View view)

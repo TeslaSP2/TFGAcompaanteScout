@@ -3,8 +3,11 @@ package com.teslasp2.ftc.acompaante_scout.actividadesDeProgresoPersonal;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +21,7 @@ import com.teslasp2.ftc.acompaante_scout.modelos.Usuarios;
 
 import java.util.ArrayList;
 
-public class ShowProgressByUser extends AppCompatActivity {
+public class ShowProgressByUser extends AppCompatActivity implements SearchView.OnQueryTextListener {
     ArrayList<ProgresoPersonal> listaprogresos;
     RecyclerView recycler;
     AdapterProgreso adapter;
@@ -92,6 +95,48 @@ public class ShowProgressByUser extends AppCompatActivity {
             }
         });
         recycler.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_query, menu);
+
+        MenuItem menuItem = menu.findItem(R.id.search_list);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+
+        searchView.setOnQueryTextListener(this);
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+
+        String busqueda = s.toLowerCase();
+        ArrayList<ProgresoPersonal> listaBusqueda = new ArrayList<>();
+
+        if(busqueda.equals(""))
+        {
+            listaBusqueda=listaprogresos;
+        }
+        else
+        {
+            for (ProgresoPersonal progresoPersonal: listaprogresos)
+            {
+                if(progresoPersonal.getNombre_progreso().toLowerCase().contains(busqueda))
+                {
+                    listaBusqueda.add(progresoPersonal);
+                }
+            }
+        }
+
+        adapter.setListaProgresos(listaBusqueda);
+
+        return false;
     }
 
     public void addProg(View view)

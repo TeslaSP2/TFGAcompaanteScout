@@ -76,11 +76,6 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
                         new ShowProgress()).commit();
                     break;
                 }
-            case R.id.bLChat:
-                {
-                    Toast.makeText(this, "No implementado aún", Toast.LENGTH_SHORT).show();
-                    break;
-                }
             case R.id.bLChangeUser:
                 {
                     CloseSessionDialog closeSessionDialog = new CloseSessionDialog();
@@ -102,7 +97,7 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     @Override
-    public void canDelete(boolean response)
+    public void exit(boolean response)
     {
         if(response)
         {

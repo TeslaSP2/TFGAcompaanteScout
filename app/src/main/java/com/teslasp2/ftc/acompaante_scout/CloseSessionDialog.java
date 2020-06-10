@@ -27,13 +27,13 @@ public class CloseSessionDialog extends AppCompatDialogFragment {
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        listener.canDelete(false);
+                        listener.exit(false);
                     }
                 })
                 .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        listener.canDelete(true);
+                        listener.exit(true);
                     }
                 });
         return builder.create();
@@ -54,6 +54,6 @@ public class CloseSessionDialog extends AppCompatDialogFragment {
 
     public interface CloseSessionDialogListener
     {
-        void canDelete(boolean response);
+        void exit(boolean response);
     }
 }
