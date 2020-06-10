@@ -42,6 +42,21 @@ public class AddUser extends AppCompatActivity
             Toast.makeText(this,"El nombre de usuario, contraseña, nombre, apellidos y cargo no puede estar vacío",
                     Toast.LENGTH_SHORT).show();
         }
+        else if(!nombre_user.getText().toString().matches("[A-Za-z0-9]+"))
+        {
+            Toast.makeText(this,"El usuario no acepta símbolos",
+                    Toast.LENGTH_SHORT).show();
+        }
+        else if(!nombre.getText().toString().matches("[A-Za-z]+")
+                ||!apellidos.getText().toString().matches("[A-Za-z]+")
+                ||!cargo.getText().toString().matches("[A-Za-z]+")
+                ||!seccion.getText().toString().matches("[A-Za-z]+")
+                ||!subgrupo.getText().toString().matches("[A-Za-z]+")
+                ||!alergenos.getText().toString().matches("[A-Za-z]+"))
+        {
+            Toast.makeText(this,"Solo la contraseña acepta números y símbolos",
+                    Toast.LENGTH_SHORT).show();
+        }
         else
         {
             String seccion, subgrupo, alergenos;

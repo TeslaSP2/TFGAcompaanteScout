@@ -38,11 +38,11 @@ public class ShowUserSelected extends AppCompatActivity implements DelUserDialog
         Bundle bundle = getIntent().getExtras();
         usuario = (Usuarios) bundle.getSerializable("usuario");
 
-        nombre.setText(usuario.getNombre());
+        nombre.setText(usuario.getNombre()+" ");
         apellidos.setText(usuario.getApellidos());
-        seccion.setText(usuario.getSeccion());
-        subgrupo.setText(usuario.getSubgrupo());
-        cargo.setText(usuario.getCargo());
+        seccion.setText(usuario.getSeccion()+" ");
+        subgrupo.setText(usuario.getSubgrupo()+" ");
+        cargo.setText(usuario.getCargo()+" ");
 
         if(usuario.isMonitor()==1)
             monitor.setText("Monitor");
@@ -89,21 +89,19 @@ public class ShowUserSelected extends AppCompatActivity implements DelUserDialog
             }
             case R.id.delShow:
             {
-                if(usuarioActual.isMonitor()==0)
-                    Toast.makeText(this, "No estás autorizado para hacer esto", Toast.LENGTH_SHORT).show();
-                else
+                if(usuarioActual.isMonitor()==1)
                 {
                     DelUserDialog delUserDialog = new DelUserDialog();
                     delUserDialog.show(getSupportFragmentManager(), "del user dialog");
                 }
+                else
+                    Toast.makeText(this, "No estás autorizado para hacer esto", Toast.LENGTH_SHORT).show();
                 break;
             }
             case R.id.modShow:
             {
-                if(usuarioActual.isMonitor()==0)
-                    Toast.makeText(this, "No estás autorizado para hacer esto", Toast.LENGTH_SHORT).show();
-                else
-                    {
+                if(usuarioActual.isMonitor()==1)
+                {
                     Bundle bundle = new Bundle();
 
                     bundle.putSerializable("usuario", usuario);
@@ -112,6 +110,8 @@ public class ShowUserSelected extends AppCompatActivity implements DelUserDialog
                     i.putExtras(bundle);
                     startActivity(i);
                 }
+                else
+                    Toast.makeText(this, "No estás autorizado para hacer esto", Toast.LENGTH_SHORT).show();
                 break;
             }
         }

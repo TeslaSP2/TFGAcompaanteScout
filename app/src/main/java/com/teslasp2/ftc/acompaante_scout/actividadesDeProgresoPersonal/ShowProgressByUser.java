@@ -96,7 +96,7 @@ public class ShowProgressByUser extends AppCompatActivity {
 
     public void addProg(View view)
     {
-        if(usuarioActual.isMonitor()==0)
+        if(usuarioActual.isMonitor()==1)
         {
             Bundle bundle = new Bundle();
 

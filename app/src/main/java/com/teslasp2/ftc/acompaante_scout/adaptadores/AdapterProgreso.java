@@ -44,7 +44,7 @@ public class AdapterProgreso extends RecyclerView.Adapter<AdapterProgreso.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull AdapterProgreso.ViewHolderProgreso viewHolderProgreso, int i) {
-        Usuarios ninio = Usuarios.getUserById(i+1);
+        Usuarios ninio = Usuarios.getUserById(listaProgresos.get(i).getId_ninio());
 
         if(ninio!=null)
             viewHolderProgreso.nombre.setText(ninio.getNombre()+" "+ninio.getApellidos()+": "+listaProgresos.get(i).getNombre_progreso());

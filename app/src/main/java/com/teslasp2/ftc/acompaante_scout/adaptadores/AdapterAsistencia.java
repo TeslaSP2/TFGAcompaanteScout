@@ -45,16 +45,15 @@ public class AdapterAsistencia extends RecyclerView.Adapter<AdapterAsistencia.Vi
 
     @Override
     public void onBindViewHolder(@NonNull AdapterAsistencia.ViewHolderAsistencia viewHolderAsistencia, int i) {
-        Usuarios ninio = Usuarios.getUserById(i+1);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Usuarios ninio = Usuarios.getUserById(listaAsistencias.get(i).getId_ninio());
 
         if(ninio!=null)
             viewHolderAsistencia.nombre.setText(ninio.getNombre()+" "+ninio.getApellidos()+": "+
-                    sdf.format(listaAsistencias.get(i).getFecha())
+                    listaAsistencias.get(i).getFechaString()
                     +" "+listaAsistencias.get(i).getTipo_encuentro());
         else
             viewHolderAsistencia.nombre.setText("Niño/a sin identificar: "+
-                    sdf.format(listaAsistencias.get(i).getFecha())
+                    listaAsistencias.get(i).getFechaString()
                     +" "+listaAsistencias.get(i).getTipo_encuentro());
 
         if(listaAsistencias.get(i).getAsistio().equals("SÍ"))

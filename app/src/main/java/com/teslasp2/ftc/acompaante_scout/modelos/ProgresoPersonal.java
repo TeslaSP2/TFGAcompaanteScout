@@ -76,6 +76,12 @@ public class ProgresoPersonal implements Serializable
         return fecha_inicio;
     }
 
+    public String getFecha_inicioString()
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(fecha_inicio);
+    }
+
     public void setFecha_inicio(Date fecha_inicio) {
         this.fecha_inicio = fecha_inicio;
     }
@@ -106,6 +112,12 @@ public class ProgresoPersonal implements Serializable
 
     public Date getFecha_final() {
         return fecha_final;
+    }
+
+    public String getFecha_finalString()
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(fecha_final);
     }
 
     public void setFecha_final(Date fecha_final) {
@@ -163,7 +175,7 @@ public class ProgresoPersonal implements Serializable
                 }
                 else
                 {
-                    prueba_1 = "";
+                    prueba_1 = "Ninguna";
                 }
 
                 if(obj.getString("prueba_2")!=null)
@@ -172,7 +184,7 @@ public class ProgresoPersonal implements Serializable
                 }
                 else
                 {
-                    prueba_2 = "";
+                    prueba_2 = "Ninguna";
                 }
 
                 if(obj.getString("prueba_3")!=null)
@@ -181,7 +193,7 @@ public class ProgresoPersonal implements Serializable
                 }
                 else
                 {
-                    prueba_3 = "";
+                    prueba_3 = "Ninguna";
                 }
 
                 if(obj.getString("fecha_final")!=null)
@@ -223,40 +235,28 @@ public class ProgresoPersonal implements Serializable
         ArrayList<ProgresoPersonal> listaProgresos = new ArrayList<>();
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String respuesta = new Asistencia.GetByNinio().execute(id_user).get();
+            String respuesta = new ProgresoPersonal.GetByNinio().execute(id_user).get();
             JSONArray jsonTotal = new JSONArray(respuesta);
 
             for(int i=0;i<jsonTotal.length();i++)
             {
                 JSONObject obj = jsonTotal.getJSONObject(i);
-                String prueba_1, prueba_2, prueba_3;
+                String prueba_1="Ninguna", prueba_2="Ninguna", prueba_3="Ninguna";
                 Date fecha_final;
 
                 if(obj.getString("prueba_1")!=null)
                 {
                     prueba_1 = obj.getString("prueba_1");
                 }
-                else
-                {
-                    prueba_1 = "";
-                }
 
                 if(obj.getString("prueba_2")!=null)
                 {
                     prueba_2 = obj.getString("prueba_2");
                 }
-                else
-                {
-                    prueba_2 = "";
-                }
 
                 if(obj.getString("prueba_3")!=null)
                 {
                     prueba_3 = obj.getString("prueba_3");
-                }
-                else
-                {
-                    prueba_3 = "";
                 }
 
                 if(obj.getString("fecha_final")!=null)

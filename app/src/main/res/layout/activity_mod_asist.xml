@@ -6,135 +6,144 @@
     android:layout_height="match_parent"
     tools:context=".actividadesDeAsistencia.ModAsist">
 
-    <Button
-        android:id="@+id/btModProgress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:text="Modificar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Modificar Asistencia"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:text="Tipo de encuentro"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/rgModTipoEncuentro"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rgModTipoEncuentro" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:text="Fecha"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/cvModFechaEncuentro"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cvModFechaEncuentro" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:text="¿Asistió?"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/rgModAsistio"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rgModAsistio" />
-
-    <CalendarView
-        android:id="@+id/cvModFechaEncuentro"
-        android:layout_width="214dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rgModTipoEncuentro" />
-
-    <RadioGroup
-        android:id="@+id/rgModAsistio"
-        android:layout_width="214dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvModFechaEncuentro">
-
-        <RadioButton
-            android:id="@+id/rbModSiAsistio"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sí"
-            android:textSize="18sp" />
+            android:layout_height="wrap_content">
 
-        <RadioButton
-            android:id="@+id/rbModRetrasoAsistio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Se retrasó"
-            android:textSize="18sp" />
+            <CalendarView
+                android:id="@+id/cvModFechaEncuentro"
+                android:layout_width="214dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rgModTipoEncuentro" />
 
-        <RadioButton
-            android:id="@+id/rbModNoAsistio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="No"
-            android:textSize="18sp" />
-    </RadioGroup>
+            <RadioGroup
+                android:id="@+id/rgModAsistio"
+                android:layout_width="214dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cvModFechaEncuentro">
 
-    <RadioGroup
-        android:id="@+id/rgModTipoEncuentro"
-        android:layout_width="214dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7">
+                <RadioButton
+                    android:id="@+id/rbModSiAsistio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sí"
+                    android:textSize="18sp" />
 
-        <RadioButton
-            android:id="@+id/rbModEncuentroReunión"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Reunión"
-            android:textSize="18sp" />
+                <RadioButton
+                    android:id="@+id/rbModRetrasoAsistio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Se retrasó"
+                    android:textSize="18sp" />
 
-        <RadioButton
-            android:id="@+id/rbModEncuentroSalida"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Salida"
-            android:textSize="18sp" />
+                <RadioButton
+                    android:id="@+id/rbModNoAsistio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No"
+                    android:textSize="18sp" />
+            </RadioGroup>
 
-        <RadioButton
-            android:id="@+id/rbModEncuentroCampa"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Campamento"
-            android:textSize="18sp" />
-    </RadioGroup>
+            <RadioGroup
+                android:id="@+id/rgModTipoEncuentro"
+                android:layout_width="214dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                <RadioButton
+                    android:id="@+id/rbModEncuentroReunión"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Reunión"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/rbModEncuentroSalida"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Salida"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/rbModEncuentroCampa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Campamento"
+                    android:textSize="18sp" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:text="Fecha"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/cvModFechaEncuentro"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/cvModFechaEncuentro" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Tipo de encuentro"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Modificar Asistencia"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:text="¿Asistió?"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/rgModAsistio"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/rgModAsistio" />
+
+            <Button
+                android:id="@+id/btModProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:onClick="aceptar"
+                android:text="Modificar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rgModAsistio" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

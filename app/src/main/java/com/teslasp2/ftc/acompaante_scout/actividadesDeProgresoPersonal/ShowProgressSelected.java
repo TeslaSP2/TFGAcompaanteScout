@@ -19,7 +19,7 @@ import java.util.concurrent.ExecutionException;
 
 public class ShowProgressSelected extends AppCompatActivity implements DelProgressDialog.DelProgressDialogListener {
 
-    TextView nombreUser, apellidoUser, fecha_inicio, prueba_1, prueba_2, prueba_3, fecha_final, entregado;
+    TextView nombreUser, apellidoUser, nombreProgress, fecha_inicio, prueba_1, prueba_2, prueba_3, fecha_final, entregado;
     ProgresoPersonal progresoPersonal;
     Usuarios usuarioActual;
 
@@ -30,6 +30,7 @@ public class ShowProgressSelected extends AppCompatActivity implements DelProgre
 
         nombreUser = findViewById(R.id.nombreUserProgress);
         apellidoUser = findViewById(R.id.apellidosUserProgress);
+        nombreProgress = findViewById(R.id.nombreProgress);
         fecha_inicio = findViewById(R.id.fechaInicioProgress);
         prueba_1 = findViewById(R.id.prueba_1Progress);
         prueba_2 = findViewById(R.id.prueba_2Progress);
@@ -39,19 +40,30 @@ public class ShowProgressSelected extends AppCompatActivity implements DelProgre
 
         Bundle bundle = getIntent().getExtras();
         progresoPersonal = (ProgresoPersonal) bundle.getSerializable("progresoPersonal");
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Usuarios usuario = Usuarios.getUserById(progresoPersonal.getId_ninio());
 
-        nombreUser.setText(usuario.getNombre());
+        nombreUser.setText(usuario.getNombre()+" ");
         apellidoUser.setText(usuario.getApellidos());
-        fecha_inicio.setText(sdf.format(progresoPersonal.getFecha_inicio()));
-        prueba_1.setText(progresoPersonal.getPrueba_1());
-        prueba_2.setText(progresoPersonal.getPrueba_2());
-        prueba_3.setText(progresoPersonal.getPrueba_3());
+        nombreProgress.setText(progresoPersonal.getNombre_progreso()+" ");
+        fecha_inicio.setText(progresoPersonal.getFecha_inicioString());
+
+        if(progresoPersonal.getPrueba_1()==null)
+            prueba_1.setText("Ninguna");
+        else
+            prueba_1.setText(progresoPersonal.getPrueba_1());
+
+        if(progresoPersonal.getPrueba_2()==null)
+            prueba_2.setText("Ninguna");
+        else
+            prueba_2.setText(progresoPersonal.getPrueba_2());
+
+        if(progresoPersonal.getPrueba_3()==null)
+            prueba_3.setText("Ninguna");
+        else
+            prueba_3.setText(progresoPersonal.getPrueba_3());
 
         if(progresoPersonal.getFecha_final()!=null)
-            fecha_final.setText(sdf.format(progresoPersonal.getFecha_final()));
+            fecha_final.setText(progresoPersonal.getFecha_finalString());
         else
             fecha_final.setText("");
 
@@ -66,42 +78,41 @@ public class ShowProgressSelected extends AppCompatActivity implements DelProgre
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_show_selected, menu);
-
-        MenuItem item = findViewById(R.id.modShow);
-        if(usuarioActual.isMonitor()==0)
-            item.setVisible(false);
-
-        item = findViewById(R.id.delShow);
-        if(usuarioActual.isMonitor()==0)
-            item.setVisible(false);
-
-        item = findViewById(R.id.showAsist);
-        item.setVisible(false);
-
-        item=findViewById(R.id.showProgress);
-        item.setVisible(false);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        int id=item.getItemId();
-
-        if(id==R.id.delShow)
+        switch(item.getItemId())
         {
-            DelProgressDialog delProgressDialog= new DelProgressDialog();
-            delProgressDialog.show(getSupportFragmentManager(), "del progress dialog");
-        }
-        if(id==R.id.modShow)
-        {
-            Bundle bundle = new Bundle();
+            case R.id.delShow:
+            {
+                if(usuarioActual.isMonitor()==1)
+                {
+                    DelProgressDialog delProgressDialog= new DelProgressDialog();
+                    delProgressDialog.show(getSupportFragmentManager(), "del progress dialog");
+                }
+                else
+                    Toast.makeText(this, "No estás autorizado para hacer esto", Toast.LENGTH_SHORT).show();
+                break;
+            }
+            case R.id.modShow:
+            {
+                if(usuarioActual.isMonitor()==1)
+                {
+                    Bundle bundle = new Bundle();
 
-            bundle.putSerializable("progresoPersonal",  progresoPersonal);
+                    bundle.putSerializable("progresoPersonal",  progresoPersonal);
 
-            Intent i = new Intent(this, ModProgress.class);
-            i.putExtras(bundle);
-            startActivity(i);
+                    Intent i = new Intent(this, ModProgress.class);
+                    i.putExtras(bundle);
+                    startActivity(i);
+                }
+                else
+                    Toast.makeText(this, "No estás autorizado para hacer esto", Toast.LENGTH_SHORT).show();
+                break;
+            }
         }
         return super.onOptionsItemSelected(item);
     }

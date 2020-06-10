@@ -46,14 +46,13 @@ public class Launch extends AppCompatActivity implements ActivityCompat.OnReques
     private void comprobarPermiso()
     {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET)
-                == PackageManager.PERMISSION_GRANTED)
+                != PackageManager.PERMISSION_GRANTED)
         {
-            Toast.makeText(this, "Perimiso ya aceptado",Toast.LENGTH_SHORT).show();
-            startApp();
+            pedirPermisoInternet();
         }
         else
         {
-            pedirPermisoInternet();
+            startApp();
         }
 
     }
@@ -61,7 +60,7 @@ public class Launch extends AppCompatActivity implements ActivityCompat.OnReques
     private void pedirPermisoInternet()
     {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                Manifest.permission.CAMERA))
+                Manifest.permission.INTERNET))
         {
             Snackbar.make(snackLayout, "Esta app necesita acceso a Internet",
                     Snackbar.LENGTH_INDEFINITE).setAction("Aceptar", new View.OnClickListener() {

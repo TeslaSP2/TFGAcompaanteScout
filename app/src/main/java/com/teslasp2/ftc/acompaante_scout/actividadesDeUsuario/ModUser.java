@@ -66,36 +66,39 @@ public class ModUser extends AppCompatActivity
             Toast.makeText(this,"El nombre de usuario, contraseña, nombre, apellidos y cargo no puede estar vacío",
                     Toast.LENGTH_SHORT).show();
         }
+        else if(!nombre_user.getText().toString().matches("[A-Za-z0-9]+"))
+        {
+            Toast.makeText(this,"El usuario no acepta símbolos",
+                    Toast.LENGTH_SHORT).show();
+        }
+        else if(!nombre.getText().toString().matches("[A-Za-z]+")
+                ||!apellidos.getText().toString().matches("[A-Za-z]+")
+                ||!cargo.getText().toString().matches("[A-Za-z]+")
+                ||!seccion.getText().toString().matches("[A-Za-z]+")
+                ||!subgrupo.getText().toString().matches("[A-Za-z]+")
+                ||!alergenos.getText().toString().matches("[A-Za-z]+"))
+        {
+            Toast.makeText(this,"Solo la contraseña acepta números y símbolos",
+                    Toast.LENGTH_SHORT).show();
+        }
         else
         {
-            String seccion, subgrupo, alergenos;
+            String seccion = "", subgrupo = "", alergenos = "";
             int monitor = 0;
 
             if(this.seccion.getText().toString()!=null)
             {
                 seccion = this.seccion.getText().toString();
             }
-            else
-            {
-                seccion = "";
-            }
 
             if(this.subgrupo.getText().toString()!=null)
             {
                 subgrupo = this.subgrupo.getText().toString();
             }
-            else
-            {
-                subgrupo = "";
-            }
 
             if(this.alergenos.getText().toString()!=null)
             {
                 alergenos = this.alergenos.getText().toString();
-            }
-            else
-            {
-                alergenos = "";
             }
 
             if(this.monitor.isChecked())
@@ -107,16 +110,16 @@ public class ModUser extends AppCompatActivity
                             alergenos);
 
             String respuesta = new Usuarios.Put().execute(nuevoUsuario.toJSONString()).get();
+
             if(respuesta!=null)
             {
-                Toast.makeText(this, nuevoUsuario.getNombre()+" añadido", Toast.LENGTH_SHORT).show();
-                finish();
+                Toast.makeText(this, nuevoUsuario.getNombre()+" modificado", Toast.LENGTH_SHORT).show();
             }
             else
             {
-                Toast.makeText(this, "ERROR AL AÑADIR", Toast.LENGTH_SHORT).show();
-                finish();
+                Toast.makeText(this, "ERROR AL MODIFICAR", Toast.LENGTH_SHORT).show();
             }
+            finish();
         }
     }
 }

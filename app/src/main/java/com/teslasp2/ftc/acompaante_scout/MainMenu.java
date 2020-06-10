@@ -45,6 +45,7 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
             navigationView.setCheckedItem(R.id.bLUsers);
         }
     }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -66,13 +67,13 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.bLAsist:
                 {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new ShowProgress()).commit();
+                            new ShowAsist()).commit();
                     break;
                 }
             case R.id.bLProgress:
                 {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new ShowAsist()).commit();
+                        new ShowProgress()).commit();
                     break;
                 }
             case R.id.bLChat:

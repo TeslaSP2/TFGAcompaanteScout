@@ -36,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
+                android:onClick="activateFinalDate"
                 android:text="Fecha final"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@+id/cvModFechaFinal"
@@ -57,7 +58,7 @@
             <CalendarView
                 android:id="@+id/cvModFechaFinal"
                 android:layout_width="215dp"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginRight="15dp"
@@ -82,13 +83,12 @@
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
                 android:text="Nombre del progreso"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@+id/etModNombre_Progreso"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/etModNombre_Progreso" />
+                app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
             <CheckBox
                 android:id="@+id/cbModEntregado"
@@ -103,7 +103,7 @@
             <CalendarView
                 android:id="@+id/cvModFechaEncuentro"
                 android:layout_width="215dp"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginRight="15dp"
@@ -115,6 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:onClick="aceptar"
                 android:text="Modificar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -147,13 +148,12 @@
                 android:id="@+id/etModNombre_Progreso"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_marginTop="16dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
             <EditText
                 android:id="@+id/etModPrueba_2"

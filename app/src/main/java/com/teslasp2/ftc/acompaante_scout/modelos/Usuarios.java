@@ -173,45 +173,41 @@ public class Usuarios implements Serializable
         Usuarios user = null;
         try {
             String respuesta = new Usuarios.Get().execute(id).get();
-            JSONArray jsonTotal = new JSONArray(respuesta);
+            JSONObject obj = new JSONObject(respuesta);
 
-            for(int j=0;j<jsonTotal.length();j++)
+            String seccion, subgrupo, alergenos;
+
+            if(obj.getString("seccion")!=null)
             {
-                JSONObject obj = jsonTotal.getJSONObject(j);
-                String seccion, subgrupo, alergenos;
-
-                if(obj.getString("seccion")!=null)
-                {
-                    seccion = obj.getString("seccion");
-                }
-                else
-                {
-                    seccion = "";
-                }
-
-                if(obj.getString("subgrupo")!=null)
-                {
-                    subgrupo = obj.getString("subgrupo");
-                }
-                else
-                {
-                    subgrupo = "";
-                }
-
-                if(obj.getString("alergenos")!=null)
-                {
-                    alergenos = obj.getString("alergenos");
-                }
-                else
-                {
-                    alergenos = "";
-                }
-
-                user =  new Usuarios(obj.getInt("Id"), obj.getString("Nombre_User"),
-                        obj.getString("Contra"), obj.getInt("Monitor"), obj.getString("nombre"),
-                        obj.getString("apellidos"), seccion,
-                        subgrupo, obj.getString("Cargo"), alergenos);
+                seccion = obj.getString("seccion");
             }
+            else
+            {
+                seccion = "";
+            }
+
+            if(obj.getString("subgrupo")!=null)
+            {
+                subgrupo = obj.getString("subgrupo");
+            }
+            else
+            {
+                subgrupo = "";
+            }
+
+            if(obj.getString("alergenos")!=null)
+            {
+                alergenos = obj.getString("alergenos");
+            }
+            else
+            {
+                alergenos = "";
+            }
+
+            user =  new Usuarios(obj.getInt("Id"), obj.getString("Nombre_User"),
+                    obj.getString("Contra"), obj.getInt("Monitor"), obj.getString("nombre"),
+                    obj.getString("apellidos"), seccion,
+                    subgrupo, obj.getString("Cargo"), alergenos);
 
         } catch (ExecutionException e) {
             e.printStackTrace();

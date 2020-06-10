@@ -68,6 +68,12 @@ public class Asistencia implements Serializable
         return fecha;
     }
 
+    public String getFechaString()
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(fecha);
+    }
+
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
@@ -88,7 +94,7 @@ public class Asistencia implements Serializable
             obj.put("Id",getId());
             obj.put("Id_ninio",getId_ninio());
             obj.put("Tipo_encuentro",getTipo_encuentro());
-            obj.put("Fecha",getFecha());
+            obj.put("Fecha",getFechaString());
             obj.put("Asistio",getAsistio());
         }
         catch (JSONException e)
@@ -281,8 +287,10 @@ public class Asistencia implements Serializable
             try {
                 connection = (HttpURLConnection) new URL(serverUrl+"/asistencia?").openConnection();
 
-                connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
                 connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+                connection.setRequestProperty("Accept", "application/json");
+                connection.setDoOutput(true);
 
                 OutputStream os = connection.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));

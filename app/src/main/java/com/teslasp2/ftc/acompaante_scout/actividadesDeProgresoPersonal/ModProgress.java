@@ -74,17 +74,20 @@ public class ModProgress extends AppCompatActivity {
         else
         {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String prueba_2 = "", prueba_3 = "";
+            String prueba_1 = "Ninguna", prueba_2 = "Ninguna", prueba_3 = "Ninguna";
             Date fechaFinal=null, fechaInicio = new Date(this.fechaInicio.getDate());
             int entregado = 0;
 
             if(cbFechaFinal.isChecked())
                 fechaFinal = new Date(this.fechaFinal.getDate());
 
-            if(this.prueba_2.getText().toString()!="")
+            if(this.prueba_1.getText().toString()!=null)
+                prueba_1 = this.prueba_1.getText().toString();
+
+            if(this.prueba_2.getText().toString()!=null)
                 prueba_2 = this.prueba_2.getText().toString();
 
-            if(this.prueba_3.getText().toString()!="")
+            if(this.prueba_3.getText().toString()!=null)
                 prueba_3 = this.prueba_3.getText().toString();
 
             if(this.entregado.isChecked())
@@ -92,7 +95,7 @@ public class ModProgress extends AppCompatActivity {
 
             ProgresoPersonal nuevoProgresoPersonal = new ProgresoPersonal(progresoPersonal.getId(),
                     progresoPersonal.getId_ninio(), nombre_progreso.getText().toString(),
-                    fechaInicio,prueba_1.getText().toString(),prueba_2,prueba_3,fechaFinal,entregado);
+                    fechaInicio,prueba_1,prueba_2,prueba_3,fechaFinal,entregado);
 
             String respuesta = new ProgresoPersonal.Put().execute(nuevoProgresoPersonal.toJSONString()).get();
             if(respuesta!=null)
@@ -100,13 +103,12 @@ public class ModProgress extends AppCompatActivity {
                 Toast.makeText(this,
                         "Progreso "+nuevoProgresoPersonal.getNombre_progreso()+" del niño/a "+usuario.getNombre()+" modificado",
                         Toast.LENGTH_SHORT).show();
-                finish();
             }
             else
             {
                 Toast.makeText(this, "ERROR AL MODIFICAR", Toast.LENGTH_SHORT).show();
-                finish();
             }
+            finish();
         }
     }
 

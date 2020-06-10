@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.teslasp2.ftc.acompaante_scout.R;
+import com.teslasp2.ftc.acompaante_scout.adaptadores.AdapterAsistencia;
 import com.teslasp2.ftc.acompaante_scout.modelos.Asistencia;
 import com.teslasp2.ftc.acompaante_scout.modelos.Usuarios;
 
@@ -36,14 +37,12 @@ public class ShowAsistSelected extends AppCompatActivity implements DelAsistDial
 
         Bundle bundle = getIntent().getExtras();
         asistencia = (Asistencia) bundle.getSerializable("asistencia");
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Usuarios usuario = Usuarios.getUserById(asistencia.getId_ninio());
 
-        nombreUser.setText(usuario.getNombre());
+        nombreUser.setText(usuario.getNombre()+" ");
         apellidoUser.setText(usuario.getApellidos());
-        tipo_encuentro.setText(asistencia.getTipo_encuentro());
-        fecha.setText(sdf.format(asistencia.getFecha()));
+        tipo_encuentro.setText(asistencia.getTipo_encuentro()+" del ");
+        fecha.setText(asistencia.getFechaString()+" ");
         asistio.setText("Asistió: "+asistencia.getAsistio());
 
         usuarioActual = Usuarios.getCurrentUser();
@@ -52,42 +51,42 @@ public class ShowAsistSelected extends AppCompatActivity implements DelAsistDial
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_show_selected, menu);
-
-        MenuItem item = findViewById(R.id.modShow);
-        if(usuarioActual.isMonitor()==0)
-            item.setVisible(false);
-
-        item = findViewById(R.id.delShow);
-        if(usuarioActual.isMonitor()==0)
-            item.setVisible(false);
-
-        item = findViewById(R.id.showAsist);
-        item.setVisible(false);
-
-        item=findViewById(R.id.showProgress);
-        item.setVisible(false);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        int id=item.getItemId();
-
-        if(id==R.id.delShow)
+        switch(item.getItemId())
         {
-            DelAsistDialog delAsistDialog = new DelAsistDialog();
-            delAsistDialog.show(getSupportFragmentManager(), "del asist dialog");
-        }
-        if(id==R.id.modShow)
-        {
-            Bundle bundle = new Bundle();
+            case R.id.delShow:
+            {
+                if(usuarioActual.isMonitor()==1)
+                {
+                    DelAsistDialog delAsistDialog = new DelAsistDialog();
+                    delAsistDialog.show(getSupportFragmentManager(), "del asist dialog");
+                }
+                else
+                    Toast.makeText(this, "No estás autorizado para hacer esto", Toast.LENGTH_SHORT).show();
+                break;
+            }
+            case R.id.modShow:
+            {
+                if(usuarioActual.isMonitor()==1)
+                {
+                    Bundle bundle = new Bundle();
 
-            bundle.putSerializable("asistencia",  asistencia);
+                    bundle.putSerializable("asistencia",  asistencia);
 
-            Intent i = new Intent(this, ModAsist.class);
-            i.putExtras(bundle);
-            startActivity(i);
+                    Intent i = new Intent(this, ModAsist.class);
+                    i.putExtras(bundle);
+                    startActivity(i);
+                }
+                else
+                    Toast.makeText(this, "No estás autorizado para hacer esto", Toast.LENGTH_SHORT).show();
+                break;
+            }
+
         }
         return super.onOptionsItemSelected(item);
     }

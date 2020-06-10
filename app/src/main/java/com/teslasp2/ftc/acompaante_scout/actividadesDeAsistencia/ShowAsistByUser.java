@@ -104,7 +104,7 @@ public class ShowAsistByUser extends AppCompatActivity {
 
     public void addAsist(View view)
     {
-        if(usuarioActual.isMonitor()==0)
+        if(usuarioActual.isMonitor()==1)
         {
             Bundle bundle = new Bundle();
 

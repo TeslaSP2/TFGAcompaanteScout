@@ -128,13 +128,12 @@ public class ModAsist extends AppCompatActivity {
             {
                 Toast.makeText(this, "Asistencia del niño/a "+usuario.getNombre()+" modificada",
                         Toast.LENGTH_SHORT).show();
-                finish();
             }
             else
             {
                 Toast.makeText(this, "ERROR AL MODIFICAR", Toast.LENGTH_SHORT).show();
-                finish();
             }
+            finish();
         }
     }
 }

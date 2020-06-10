@@ -38,6 +38,7 @@ public class AddAsist extends AppCompatActivity {
         usuario = (Usuarios) bundle.getSerializable("usuario");
 
         reunion.setChecked(true);
+        si.setChecked(true);
     }
 
     //Comprueba si todo está bien formado y la inserta en la base de datos
@@ -51,7 +52,7 @@ public class AddAsist extends AppCompatActivity {
         {
             Date fecha = new Date(this.fecha.getDate());
 
-            String asistio, tipo_encuentro = "REUNIÓN";
+            String asistio = "NO", tipo_encuentro = "REUNIÓN";
 
             if(si.isChecked())
                 asistio="SÍ";
@@ -59,8 +60,6 @@ public class AddAsist extends AppCompatActivity {
                 asistio="NO";
             else if(retraso.isChecked())
                 asistio="RETRASO";
-            else
-                asistio="NO";
 
             if(reunion.isChecked())
                 tipo_encuentro="REUNIÓN";
@@ -75,15 +74,14 @@ public class AddAsist extends AppCompatActivity {
             String respuesta = new Asistencia.Post().execute(asistencia.toJSONString()).get();
             if(respuesta!=null)
             {
-                Toast.makeText(this, "Asistencia del niño/a "+usuario.getNombre()+" añadida",
+                Toast.makeText(this, "Asistencia del niño/a "+usuario.getNombre()+" añadida "+respuesta+" "+asistencia.toJSONString(),
                         Toast.LENGTH_SHORT).show();
-                finish();
             }
             else
             {
                 Toast.makeText(this, "ERROR AL AÑADIR", Toast.LENGTH_SHORT).show();
-                finish();
             }
+            finish();
         }
     }
 }
