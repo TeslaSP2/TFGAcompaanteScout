@@ -79,15 +79,16 @@
                     android:text="CARGO"
                     android:textSize="18sp"/>
 
-                <TextView
-                    android:id="@+id/monitorUser"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="textStart"
-                    android:gravity="start"
-                    android:text="MONITOR"
-                    android:textSize="18sp"/>
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/monitorUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="MONITOR"
+                android:textAlignment="textStart"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/alergenosUser"

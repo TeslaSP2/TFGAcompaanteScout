@@ -13,7 +13,6 @@ import com.teslasp2.ftc.acompaante_scout.R;
 import com.teslasp2.ftc.acompaante_scout.modelos.Asistencia;
 import com.teslasp2.ftc.acompaante_scout.modelos.Usuarios;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class AdapterAsistencia extends RecyclerView.Adapter<AdapterAsistencia.ViewHolderAsistencia> implements View.OnClickListener {

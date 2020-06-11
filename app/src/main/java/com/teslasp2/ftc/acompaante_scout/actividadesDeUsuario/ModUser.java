@@ -59,7 +59,9 @@ public class ModUser extends AppCompatActivity
             monitor.setChecked(true);
     }
 
-    public void aceptar(View view) throws ExecutionException, InterruptedException {
+    //Comprueba que todo este bien para poder cambiar el progreso personal seleccionado
+    public void aceptar(View view) throws ExecutionException, InterruptedException
+    {
         if(nombre_user.getText().toString()==""||contra.getText().toString()==""||nombre.getText().toString()==""
                 ||apellidos.getText().toString()==""||cargo.getText().toString()=="")
         {
@@ -109,6 +111,7 @@ public class ModUser extends AppCompatActivity
                             nombre.getText().toString(),apellidos.getText().toString(),seccion,subgrupo,cargo.getText().toString(),
                             alergenos);
 
+            //Obtiene el código de la respuesta para determinar si se modificó bien o no
             String respuesta = new Usuarios.Put().execute(nuevoUsuario.toJSONString()).get();
 
             if(respuesta!=null)

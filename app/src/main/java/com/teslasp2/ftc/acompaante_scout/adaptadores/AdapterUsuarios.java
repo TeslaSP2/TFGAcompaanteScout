@@ -37,20 +37,19 @@ public class AdapterUsuarios extends RecyclerView.Adapter<AdapterUsuarios.ViewHo
     @Override
     public void onBindViewHolder(@NonNull AdapterUsuarios.ViewHolderUsuarios viewHolderUsuarios, int i) {
         String info = "";
-        if(listaUsuarios.get(i).getSeccion()!=""||listaUsuarios.get(i).getSeccion().equals(" "))
+        if(!listaUsuarios.get(i).getSeccion().equals("")||!listaUsuarios.get(i).getSeccion().equals(" ")
+        ||listaUsuarios.get(i).getSeccion()!=null)
         {
             info += listaUsuarios.get(i).getSeccion()+", ";
         }
 
-        if(listaUsuarios.get(i).getSubgrupo()!=""||listaUsuarios.get(i).getSubgrupo().equals(" "))
+        if(!listaUsuarios.get(i).getSubgrupo().equals("")||!listaUsuarios.get(i).getSubgrupo().equals(" ")
+        ||listaUsuarios.get(i).getSubgrupo()!=null)
         {
             info += listaUsuarios.get(i).getSubgrupo()+", ";
         }
 
-        if(listaUsuarios.get(i).getCargo()!=""||listaUsuarios.get(i).getCargo().equals(" "))
-        {
-            info += listaUsuarios.get(i).getCargo();
-        }
+        info += listaUsuarios.get(i).getCargo();
 
         viewHolderUsuarios.nombre.setText(listaUsuarios.get(i).getNombre()+" "+listaUsuarios.get(i).getApellidos());
         viewHolderUsuarios.info.setText(info);
@@ -81,11 +80,5 @@ public class AdapterUsuarios extends RecyclerView.Adapter<AdapterUsuarios.ViewHo
             nombre = itemView.findViewById(R.id.tvNombreApellidos);
             info = itemView.findViewById(R.id.tvSeccionSubgrupo);
         }
-    }
-
-    public void setListaUsuarios(ArrayList<Usuarios> nuevosUsuarios) {
-        listaUsuarios = new ArrayList<>();
-        listaUsuarios.addAll(nuevosUsuarios);
-        notifyDataSetChanged();
     }
 }

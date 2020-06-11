@@ -16,9 +16,6 @@ import java.net.HttpURLConnection;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
-import static com.teslasp2.ftc.acompaante_scout.modelos.Asistencia.getAsistsArray;
-import static com.teslasp2.ftc.acompaante_scout.modelos.Asistencia.getLastID;
-
 public class AddAsist extends AppCompatActivity {
 
     CalendarView fecha;
@@ -76,6 +73,7 @@ public class AddAsist extends AppCompatActivity {
             Asistencia asistencia = new Asistencia(lastId+1, usuario.getId(), tipo_encuentro, fecha,
                     asistio);
 
+            //Obtiene el código de la respuesta para determinar si se insertó bien o no
             int respuesta = new Asistencia.Post().execute(asistencia.toJSONString()).get();
             if(respuesta == HttpURLConnection.HTTP_OK)
             {

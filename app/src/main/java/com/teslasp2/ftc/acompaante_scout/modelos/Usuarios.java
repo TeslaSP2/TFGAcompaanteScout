@@ -152,10 +152,23 @@ public class Usuarios implements Serializable
             obj.put("monitor",isMonitor());
             obj.put("nombre",getNombre());
             obj.put("apellidos",getApellidos());
-            obj.put("seccion",getSeccion());
-            obj.put("subgrupo",getSubgrupo());
+
+            if(getSeccion()==null)
+                obj.put("seccion","");
+            else
+                obj.put("seccion",getSeccion());
+
+            if(getSubgrupo()==null)
+                obj.put("subgrupo","");
+            else
+                obj.put("subgrupo",getSubgrupo());
+
             obj.put("cargo",getCargo());
-            obj.put("alergenos",getAlergenos());
+
+            if(getAlergenos()==null)
+                obj.put("alergenos","");
+            else
+                obj.put("alergenos",getAlergenos());
         }
         catch (JSONException e)
         {
@@ -293,6 +306,9 @@ public class Usuarios implements Serializable
                 connection = (HttpURLConnection) new URL(serverUrl+"/usuarios").openConnection();
                 connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
 
+                connection.setConnectTimeout(5000);
+                connection.setReadTimeout(5000);
+
                 connection.connect();
 
                 BufferedInputStream input = new BufferedInputStream(connection.getInputStream());
@@ -331,6 +347,9 @@ public class Usuarios implements Serializable
                 connection = (HttpURLConnection) new URL(serverUrl+"/usuario/"+integers[0]).openConnection();
                 connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
 
+                connection.setConnectTimeout(5000);
+                connection.setReadTimeout(5000);
+
                 connection.connect();
 
                 BufferedInputStream input = new BufferedInputStream(connection.getInputStream());
@@ -358,10 +377,10 @@ public class Usuarios implements Serializable
         }
     }
 
-    public static class Post extends AsyncTask<String, Void, String>
+    public static class Post extends AsyncTask<String, Void, Integer>
     {
         @Override
-        protected String doInBackground(String... strings)
+        protected Integer doInBackground(String... strings)
         {
             HttpURLConnection connection = null;
 
@@ -372,6 +391,9 @@ public class Usuarios implements Serializable
                 connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
                 connection.setRequestProperty("Accept", "application/json");
                 connection.setDoOutput(true);
+
+                connection.setConnectTimeout(5000);
+                connection.setReadTimeout(5000);
 
                 connection.connect();
 
@@ -385,7 +407,7 @@ public class Usuarios implements Serializable
                 os.close();
 
                 System.err.println(connection.getResponseMessage()+"");
-                return connection.getResponseMessage()+"";
+                return connection.getResponseCode();
             }
             catch (IOException e)
             {
@@ -414,6 +436,11 @@ public class Usuarios implements Serializable
                 connection.setRequestProperty("Accept", "application/json");
                 connection.setDoOutput(true);
 
+                connection.setConnectTimeout(5000);
+                connection.setReadTimeout(5000);
+
+                connection.connect();
+
                 OutputStream os = connection.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
 
@@ -422,8 +449,6 @@ public class Usuarios implements Serializable
                 writer.flush();
                 writer.close();
                 os.close();
-
-                connection.connect();
 
                 System.err.println(connection.getResponseMessage()+"");
                 return connection.getResponseMessage()+"";
@@ -440,10 +465,10 @@ public class Usuarios implements Serializable
         }
     }
 
-    public static class Delete extends AsyncTask<Integer, Void, String>
+    public static class Delete extends AsyncTask<Integer, Void, Integer>
     {
         @Override
-        protected String doInBackground(Integer... integers)
+        protected Integer doInBackground(Integer... integers)
         {
             HttpURLConnection connection = null;
 
@@ -454,10 +479,13 @@ public class Usuarios implements Serializable
                 connection.setRequestMethod("DELETE");
                 connection.setDoOutput(true);
 
+                connection.setConnectTimeout(5000);
+                connection.setReadTimeout(5000);
+
                 connection.connect();
 
                 System.err.println(connection.getResponseMessage()+"");
-                return connection.getResponseMessage()+"";
+                return connection.getResponseCode();
 
 
             }

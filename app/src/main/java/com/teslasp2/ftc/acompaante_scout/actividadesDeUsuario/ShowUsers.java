@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,11 +32,14 @@ public class ShowUsers extends Fragment
         recycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
         usuarioActual = Usuarios.getCurrentUser();
 
+        //Vacia la lista
         if(listaUsuarios!=null)
             listaUsuarios.clear();
 
+        //Vuelve a llenar la lista con los datos de la base de datos
         listaUsuarios = Usuarios.getUsersArray();
 
+        //Añade un listener al adaptador para luego aplicarlo al recycler view
         adapter = new AdapterUsuarios();
         adapter.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -53,6 +55,8 @@ public class ShowUsers extends Fragment
                 startActivity(i);
             }
         });
+
+        //Añade el adaptador al recycler view
         recycler.setAdapter(adapter);
 
         return vistaRaiz;

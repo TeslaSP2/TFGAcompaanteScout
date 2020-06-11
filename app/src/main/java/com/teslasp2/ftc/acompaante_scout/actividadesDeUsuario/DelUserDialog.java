@@ -14,6 +14,12 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.teslasp2.ftc.acompaante_scout.R;
 
+/*
+ * Esta clase es una ventana emergente para que salga a la hora de que el usuario intente
+ * borrar a otro usuario. En caso de que le de a cancelar o fuera de la ventana no se
+ * borrará el usuario, en el caso de que le de a aceptar lo borrará.
+ */
+
 public class DelUserDialog extends AppCompatDialogFragment {
 
     DelUserDialogListener listener;

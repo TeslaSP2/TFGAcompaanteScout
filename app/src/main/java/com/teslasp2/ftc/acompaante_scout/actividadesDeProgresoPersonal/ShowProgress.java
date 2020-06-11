@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.teslasp2.ftc.acompaante_scout.R;
 import com.teslasp2.ftc.acompaante_scout.adaptadores.AdapterProgreso;
@@ -32,11 +31,14 @@ public class ShowProgress extends Fragment {
 
         recycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
 
+        //Vacia la lista
         if(listaprogresos !=null)
             listaprogresos.clear();
 
+        //Vuelve a llenar la lista con los datos de la base de datos
         listaprogresos = ProgresoPersonal.getProgressArray();
 
+        //Añade un listener al adaptador para luego aplicarlo al recycler view
         adapter = new AdapterProgreso();
         adapter.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -52,6 +54,8 @@ public class ShowProgress extends Fragment {
                 startActivity(i);
             }
         });
+
+        //Añade el adaptador al recycler view
         recycler.setAdapter(adapter);
 
         return vistaRaiz;

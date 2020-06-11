@@ -10,11 +10,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.teslasp2.ftc.acompaante_scout.R;
-import com.teslasp2.ftc.acompaante_scout.modelos.Asistencia;
 import com.teslasp2.ftc.acompaante_scout.modelos.ProgresoPersonal;
 import com.teslasp2.ftc.acompaante_scout.modelos.Usuarios;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
@@ -44,6 +42,7 @@ public class AddProgress extends AppCompatActivity {
         usuario = (Usuarios) bundle.getSerializable("usuario");
     }
 
+    //Comprueba si todo está bien formado y lo inserta en la base de datos
     public void aceptar(View view) throws ExecutionException, InterruptedException {
         if(nombre_progreso.getText().toString()=="")
         {
@@ -76,6 +75,7 @@ public class AddProgress extends AppCompatActivity {
                     nombre_progreso.getText().toString(),fechaInicio,prueba_1,prueba_2,prueba_3,
                     fechaFinal,entregado);
 
+            //Obtiene el código de la respuesta para determinar si se insertó bien o no
             String respuesta = new ProgresoPersonal.Post().execute(progresoPersonal.toJSONString()).get();
             if(respuesta!=null)
             {

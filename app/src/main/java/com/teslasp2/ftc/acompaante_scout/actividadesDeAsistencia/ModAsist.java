@@ -12,8 +12,7 @@ import com.teslasp2.ftc.acompaante_scout.R;
 import com.teslasp2.ftc.acompaante_scout.modelos.Asistencia;
 import com.teslasp2.ftc.acompaante_scout.modelos.Usuarios;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.net.HttpURLConnection;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
@@ -125,15 +124,16 @@ public class ModAsist extends AppCompatActivity {
             Asistencia nuevaAsistencia = new Asistencia(asistencia.getId(), asistencia.getId_ninio(),
                     tipo_encuentro, fecha, asistio);
 
-            String respuesta = new Asistencia.Put().execute(nuevaAsistencia.toJSONString()).get();
-            if(respuesta!=null)
+            //Obtiene el código de la respuesta para determinar si se modificó bien o no
+            int respuesta = new Asistencia.Put().execute(nuevaAsistencia.toJSONString()).get();
+            if(respuesta== HttpURLConnection.HTTP_OK)
             {
-                Toast.makeText(this, "Asistencia del niño/a "+respuesta+" "+nuevaAsistencia.toJSONString()+" "+usuario.getNombre()+" modificada",
+                Toast.makeText(this, "Asistencia del niño/a "+usuario.getNombre()+" modificada",
                         Toast.LENGTH_SHORT).show();
             }
             else
             {
-                Toast.makeText(this, "ERROR AL MODIFICAR", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "ERROR AL MODIFICAR "+respuesta+" "+nuevaAsistencia.toJSONString(), Toast.LENGTH_SHORT).show();
             }
             finish();
         }

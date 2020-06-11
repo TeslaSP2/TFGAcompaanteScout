@@ -157,7 +157,7 @@ public class ProgresoPersonal implements Serializable
             obj.put("prueba_2",getPrueba_2());
             obj.put("prueba_3",getPrueba_3());
             obj.put("fecha_final",getFecha_finalString());
-            obj.put("entregado",entregado);
+            obj.put("entregado",isEntregado());
         }
         catch (JSONException e)
         {
@@ -316,6 +316,9 @@ public class ProgresoPersonal implements Serializable
                 connection = (HttpURLConnection) new URL(serverUrl+"/progresos_personales").openConnection();
                 connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
 
+                connection.setConnectTimeout(5000);
+                connection.setReadTimeout(5000);
+
                 connection.connect();
 
                 BufferedInputStream input = new BufferedInputStream(connection.getInputStream());
@@ -354,6 +357,9 @@ public class ProgresoPersonal implements Serializable
                 connection = (HttpURLConnection) new URL(serverUrl+"/progreso_personal/"+integers[0]).openConnection();
                 connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
 
+                connection.setConnectTimeout(5000);
+                connection.setReadTimeout(5000);
+
                 connection.connect();
 
                 BufferedInputStream input = new BufferedInputStream(connection.getInputStream());
@@ -391,6 +397,9 @@ public class ProgresoPersonal implements Serializable
             try {
                 connection = (HttpURLConnection) new URL(serverUrl+"/progreso_ninio/"+integers[0]).openConnection();
                 connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+
+                connection.setConnectTimeout(5000);
+                connection.setReadTimeout(5000);
 
                 connection.connect();
 
@@ -434,6 +443,9 @@ public class ProgresoPersonal implements Serializable
                 connection.setRequestProperty("Accept", "application/json");
                 connection.setDoOutput(true);
 
+                connection.setConnectTimeout(5000);
+                connection.setReadTimeout(5000);
+
                 connection.connect();
 
                 OutputStream os = connection.getOutputStream();
@@ -460,10 +472,10 @@ public class ProgresoPersonal implements Serializable
         }
     }
 
-    public static class Put extends AsyncTask<String, Void, String>
+    public static class Put extends AsyncTask<String, Void, Integer>
     {
         @Override
-        protected String doInBackground(String... strings)
+        protected Integer doInBackground(String... strings)
         {
             HttpURLConnection connection = null;
 
@@ -472,6 +484,11 @@ public class ProgresoPersonal implements Serializable
 
                 connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
                 connection.setRequestMethod("PUT");
+
+                connection.setConnectTimeout(5000);
+                connection.setReadTimeout(5000);
+
+                connection.connect();
 
                 OutputStream os = connection.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
@@ -482,10 +499,8 @@ public class ProgresoPersonal implements Serializable
                 writer.close();
                 os.close();
 
-                connection.connect();
-
                 System.err.println(connection.getResponseMessage()+"");
-                return connection.getResponseMessage()+"";
+                return connection.getResponseCode();
             }
             catch (IOException e)
             {

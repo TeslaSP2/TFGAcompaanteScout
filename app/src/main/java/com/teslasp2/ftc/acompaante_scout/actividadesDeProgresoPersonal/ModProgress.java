@@ -13,6 +13,7 @@ import com.teslasp2.ftc.acompaante_scout.R;
 import com.teslasp2.ftc.acompaante_scout.modelos.ProgresoPersonal;
 import com.teslasp2.ftc.acompaante_scout.modelos.Usuarios;
 
+import java.net.HttpURLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
@@ -66,7 +67,9 @@ public class ModProgress extends AppCompatActivity {
             entregado.setChecked(false);
     }
 
-    public void aceptar(View view) throws ExecutionException, InterruptedException {
+    //Comprueba que todo este bien para poder cambiar el usuario seleccionado
+    public void aceptar(View view) throws ExecutionException, InterruptedException
+    {
         if(nombre_progreso.getText().toString()=="")
         {
             Toast.makeText(this,"El nombre del progreso personal no puede estar en blanco", Toast.LENGTH_SHORT).show();
@@ -97,8 +100,9 @@ public class ModProgress extends AppCompatActivity {
                     progresoPersonal.getId_ninio(), nombre_progreso.getText().toString(),
                     fechaInicio,prueba_1,prueba_2,prueba_3,fechaFinal,entregado);
 
-            String respuesta = new ProgresoPersonal.Put().execute(nuevoProgresoPersonal.toJSONString()).get();
-            if(respuesta!=null)
+            //Obtiene el código de la respuesta para determinar si se modificó bien o no
+            int respuesta = new ProgresoPersonal.Put().execute(nuevoProgresoPersonal.toJSONString()).get();
+            if(respuesta== HttpURLConnection.HTTP_OK)
             {
                 Toast.makeText(this,
                         "Progreso "+nuevoProgresoPersonal.getNombre_progreso()+" del niño/a "+usuario.getNombre()+" modificado",
@@ -106,7 +110,7 @@ public class ModProgress extends AppCompatActivity {
             }
             else
             {
-                Toast.makeText(this, "ERROR AL MODIFICAR", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "ERROR AL MODIFICAR "+respuesta+" "+nuevoProgresoPersonal.toJSONString(), Toast.LENGTH_SHORT).show();
             }
             finish();
         }

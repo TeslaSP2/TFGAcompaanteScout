@@ -1,7 +1,6 @@
 package com.teslasp2.ftc.acompaante_scout.actividadesDeAsistencia;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,11 +10,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.teslasp2.ftc.acompaante_scout.R;
-import com.teslasp2.ftc.acompaante_scout.adaptadores.AdapterAsistencia;
 import com.teslasp2.ftc.acompaante_scout.modelos.Asistencia;
 import com.teslasp2.ftc.acompaante_scout.modelos.Usuarios;
 
-import java.text.SimpleDateFormat;
 import java.util.concurrent.ExecutionException;
 
 public class ShowAsistSelected extends AppCompatActivity implements DelAsistDialog.DelAsistDialogListener {
@@ -39,21 +36,29 @@ public class ShowAsistSelected extends AppCompatActivity implements DelAsistDial
         asistencia = (Asistencia) bundle.getSerializable("asistencia");
         Usuarios usuario = Usuarios.getUserById(asistencia.getId_ninio());
 
+        //Carga los datos de la asistencia escogida
         nombreUser.setText(usuario.getNombre()+" ");
         apellidoUser.setText(usuario.getApellidos());
         tipo_encuentro.setText(asistencia.getTipo_encuentro()+" del ");
         fecha.setText(asistencia.getFechaString()+" ");
         asistio.setText("Asistió: "+asistencia.getAsistio());
 
+        //Obtiene el usuario actual para determinar si puede borrar y modificar o no
         usuarioActual = Usuarios.getCurrentUser();
     }
 
+    //Inserta el menú con todas las opciones que pueden hacer los usuarios
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_show_selected_asist_progress, menu);
         return true;
     }
 
+    /*
+     * Dependiendo de lo que pulsase el usuario este método hará varias cosas:
+     * delShow: Muestra el diálogo para borrar la asistencia
+     * modShow: Envía al usuario a una nueva ventana donde podrá modificar la asistencia
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -91,6 +96,7 @@ public class ShowAsistSelected extends AppCompatActivity implements DelAsistDial
         return super.onOptionsItemSelected(item);
     }
 
+    //Método implementado de DelAsistDialog para borrar la asistencia
     @Override
     public void canDelete(boolean response)
     {

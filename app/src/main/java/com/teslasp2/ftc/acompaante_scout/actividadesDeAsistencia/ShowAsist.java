@@ -17,7 +17,8 @@ import com.teslasp2.ftc.acompaante_scout.modelos.Asistencia;
 
 import java.util.ArrayList;
 
-public class ShowAsist extends Fragment {
+public class ShowAsist extends Fragment
+{
     ArrayList<Asistencia> listaAsistencias;
     RecyclerView recycler;
     AdapterAsistencia adapter;

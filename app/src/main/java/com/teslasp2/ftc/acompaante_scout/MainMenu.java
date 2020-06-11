@@ -10,7 +10,6 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.teslasp2.ftc.acompaante_scout.actividadesDeAsistencia.ShowAsist;
@@ -23,6 +22,7 @@ public class MainMenu extends AppCompatActivity implements NavigationView.OnNavi
     DrawerLayout barraLateral;
     Toolbar toolbar;
     NavigationView navigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

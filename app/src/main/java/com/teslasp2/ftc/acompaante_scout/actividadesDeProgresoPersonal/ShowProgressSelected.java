@@ -1,7 +1,6 @@
 package com.teslasp2.ftc.acompaante_scout.actividadesDeProgresoPersonal;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +13,6 @@ import com.teslasp2.ftc.acompaante_scout.R;
 import com.teslasp2.ftc.acompaante_scout.modelos.ProgresoPersonal;
 import com.teslasp2.ftc.acompaante_scout.modelos.Usuarios;
 
-import java.text.SimpleDateFormat;
 import java.util.concurrent.ExecutionException;
 
 public class ShowProgressSelected extends AppCompatActivity implements DelProgressDialog.DelProgressDialogListener {
@@ -47,6 +45,7 @@ public class ShowProgressSelected extends AppCompatActivity implements DelProgre
         nombreProgress.setText(progresoPersonal.getNombre_progreso()+" ");
         fecha_inicio.setText(progresoPersonal.getFecha_inicioString());
 
+        //Carga los datos del progreso personal escogido
         if(progresoPersonal.getPrueba_1()==null)
             prueba_1.setText("Ninguna");
         else
@@ -72,15 +71,22 @@ public class ShowProgressSelected extends AppCompatActivity implements DelProgre
         else
             entregado.setText("No entregado");
 
+        //Obtiene el usuario actual para determinar si puede borrar y modificar o no
         usuarioActual = Usuarios.getCurrentUser();
     }
 
+    //Inserta el menú con todas las opciones que pueden hacer los usuarios
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_show_selected_asist_progress, menu);
         return true;
     }
 
+    /*
+     * Dependiendo de lo que pulsase el usuario este método hará varias cosas:
+     * delShow: Muestra el diálogo para borrar el progreso personal
+     * modShow: Envía al usuario a una nueva ventana donde podrá modificar el progreso personal
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -117,6 +123,7 @@ public class ShowProgressSelected extends AppCompatActivity implements DelProgre
         return super.onOptionsItemSelected(item);
     }
 
+    //Método implementado de DelProgressDialog para borrar el progreso personal
     @Override
     public void canDelete(boolean response)
     {

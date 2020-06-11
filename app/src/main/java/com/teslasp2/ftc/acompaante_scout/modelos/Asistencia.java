@@ -181,6 +181,9 @@ public class Asistencia implements Serializable
                 connection = (HttpURLConnection) new URL(serverUrl+"/asistencias").openConnection();
                 connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
 
+                connection.setConnectTimeout(5000);
+                connection.setReadTimeout(5000);
+
                 connection.connect();
 
                 BufferedInputStream input = new BufferedInputStream(connection.getInputStream());
@@ -219,6 +222,9 @@ public class Asistencia implements Serializable
                 connection = (HttpURLConnection) new URL(serverUrl+"/asistencia/"+integers[0]).openConnection();
                 connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
 
+                connection.setConnectTimeout(5000);
+                connection.setReadTimeout(5000);
+
                 connection.connect();
 
                 BufferedInputStream input = new BufferedInputStream(connection.getInputStream());
@@ -256,6 +262,9 @@ public class Asistencia implements Serializable
             try {
                 connection = (HttpURLConnection) new URL(serverUrl+"/asistencia_ninio/"+integers[0]).openConnection();
                 connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+
+                connection.setConnectTimeout(5000);
+                connection.setReadTimeout(5000);
 
                 connection.connect();
 
@@ -299,6 +308,9 @@ public class Asistencia implements Serializable
                 connection.setRequestProperty("Accept", "application/json");
                 connection.setDoOutput(true);
 
+                connection.setConnectTimeout(5000);
+                connection.setReadTimeout(5000);
+
                 connection.connect();
 
                 OutputStream os = connection.getOutputStream();
@@ -325,10 +337,10 @@ public class Asistencia implements Serializable
         }
     }
 
-    public static class Put extends AsyncTask<String, Void, String>
+    public static class Put extends AsyncTask<String, Void, Integer>
     {
         @Override
-        protected String doInBackground(String... strings)
+        protected Integer doInBackground(String... strings)
         {
             HttpURLConnection connection = null;
 
@@ -337,6 +349,9 @@ public class Asistencia implements Serializable
 
                 connection.setRequestMethod("PUT");
                 connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+
+                connection.setConnectTimeout(5000);
+                connection.setReadTimeout(5000);
 
                 connection.connect();
 
@@ -350,7 +365,7 @@ public class Asistencia implements Serializable
                 os.close();
 
                 System.err.println(connection.getResponseMessage()+"");
-                return connection.getResponseMessage()+"";
+                return connection.getResponseCode();
             }
             catch (IOException e)
             {

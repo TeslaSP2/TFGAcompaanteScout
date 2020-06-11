@@ -14,6 +14,12 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.teslasp2.ftc.acompaante_scout.R;
 
+/*
+ * Esta clase es una ventana emergente para que salga a la hora de que el usuario intente
+ * borrar un progreso personal. En caso de que le de a cancelar o fuera de la ventana no se
+ * borrará el progreso personal, en el caso de que le de a aceptar lo borrará.
+ */
+
 public class DelProgressDialog extends AppCompatDialogFragment {
 
     DelProgressDialogListener listener;

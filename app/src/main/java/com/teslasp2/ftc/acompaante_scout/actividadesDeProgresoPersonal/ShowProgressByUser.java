@@ -1,7 +1,6 @@
 package com.teslasp2.ftc.acompaante_scout.actividadesDeProgresoPersonal;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,13 +38,17 @@ public class ShowProgressByUser extends AppCompatActivity implements SearchView.
         Bundle bundle = getIntent().getExtras();
         usuario = (Usuarios) bundle.getSerializable("usuario");
 
+        //Obtiene el usuario actual basado en los datos guardados en el Login
         usuarioActual = Usuarios.getCurrentUser();
 
+        //Vacia la lista
         if(listaprogresos !=null)
             listaprogresos.clear();
 
+        //Vuelve a llenar la lista con los datos de la base de datos
         listaprogresos = ProgresoPersonal.getProgressByUser(usuario.getId());
 
+        //Añade un listener al adaptador para luego aplicarlo al recycler view
         adapter = new AdapterProgreso(usuario.getId());
         adapter.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -61,14 +64,20 @@ public class ShowProgressByUser extends AppCompatActivity implements SearchView.
                 startActivity(i);
             }
         });
+        //Añade el adaptador al recycler view
         recycler.setAdapter(adapter);
 
+        //Si el usuario actual es monitor oculta el botón para insertar nuevos progresos
         if(usuarioActual.isMonitor()==0)
             add.setVisibility(View.INVISIBLE);
         else
             add.setVisibility(View.VISIBLE);
     }
 
+    /*
+     * Lo mismo que en el onCreate solo que se activa cada vez que se vuelve a la actividad tras
+     * modificar o borrar progresos
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -97,6 +106,7 @@ public class ShowProgressByUser extends AppCompatActivity implements SearchView.
         recycler.setAdapter(adapter);
     }
 
+    //Añade el menú de búsqueda a la actividad
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_query, menu);
@@ -108,11 +118,16 @@ public class ShowProgressByUser extends AppCompatActivity implements SearchView.
         return true;
     }
 
+    /*
+     * Se activa cuando se le da a enter en el  teclado al buscar, nos lo obligan ponerlo
+     * aunque no nos es necesario en esta ocasión
+     */
     @Override
     public boolean onQueryTextSubmit(String s) {
         return false;
     }
 
+    //Se activa cada vez que haya un cambio de texto en la búsqueda
     @Override
     public boolean onQueryTextChange(String s) {
 
@@ -139,6 +154,7 @@ public class ShowProgressByUser extends AppCompatActivity implements SearchView.
         return false;
     }
 
+    //Envía al usuario a la actividad para añadir Progresos Personales
     public void addProg(View view)
     {
         if(usuarioActual.isMonitor()==1)
